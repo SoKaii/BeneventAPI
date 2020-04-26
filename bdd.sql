@@ -11,12 +11,12 @@ CREATE TABLE user(
         idu           Int  Auto_increment  NOT NULL ,
         name          Varchar (50) NOT NULL ,
         firstname     Varchar (50) NOT NULL ,
-        email         Varchar (100) NOT NULL ,
+        email         Varchar (100) NOT NULL UNIQUE,
 		password	  Varchar (50) NOT NULL ,
         phone         Varchar (12) ,
         profilpicture Blob ,
         address       Text NOT NULL ,
-        description   Text NOT NULL 
+        description   Text NOT NULL
 	,CONSTRAINT user_PK PRIMARY KEY (idu)
 )ENGINE=InnoDB;
 
@@ -181,4 +181,3 @@ CREATE TABLE interest(
 	,CONSTRAINT interest_event_FK FOREIGN KEY (idev) REFERENCES event(idev)
 	,CONSTRAINT interest_user0_FK FOREIGN KEY (idu) REFERENCES user(idu)
 )ENGINE=InnoDB;
-
