@@ -12,7 +12,7 @@ CREATE TABLE user(
         name          Varchar (50) NOT NULL ,
         firstname     Varchar (50) NOT NULL ,
 		age			Date NOT NULL,
-        email         Varchar (100) NOT NULL ,
+        email         Varchar (100) NOT NULL UNIQUE,
 		password      Varchar (50) NOT NULL,
         phone         Text ,
         profilpicture Blob ,
@@ -43,10 +43,10 @@ INSERT INTO category(name) values("homeless");
 
 CREATE TABLE association(
         idas     Int  Auto_increment  NOT NULL ,
-        name     Varchar (50) NOT NULL ,
+        name     Varchar (50) NOT NULL UNIQUE,
         logo     Blob ,
         acronym  Varchar (50) ,
-        email    Varchar (50) NOT NULL ,
+        email    Varchar (50) NOT NULL UNIQUE,
         phone    Varchar (50) ,
         website  Varchar (50) ,
         support  Varchar (50) ,
