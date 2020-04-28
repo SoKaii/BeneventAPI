@@ -14,7 +14,7 @@ CREATE TABLE user(
 		age			Date NOT NULL,
         email         Varchar (100) NOT NULL UNIQUE,
 		password      Varchar (50) NOT NULL,
-        phone         Text ,
+        phone         Varchar(12) ,
         profilpicture Blob ,
         address       Text ,
         description   Varchar (250)         
@@ -47,7 +47,7 @@ CREATE TABLE association(
         logo     Blob ,
         acronym  Varchar (50) ,
         email    Varchar (50) NOT NULL UNIQUE,
-        phone    Varchar (50) ,
+        phone    Varchar (12) ,
         website  Varchar (50) ,
         support  Varchar (50) ,
         password Varchar (50) NOT NULL ,
