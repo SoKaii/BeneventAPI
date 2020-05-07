@@ -80,11 +80,11 @@ app.post('/signin/admin', async function (req, res) {
             res.status(500).send({error: "Internal Server Error"});
         }
         if(result.length > 0) {
-            console.log(result);
-            res.status(200).send(result);
+            console.log(result[0]);
+            res.status(200).send(result[0]);
         } else {
-            console.log(result);
-            res.status(401).send({error: "Login or password is incorrect"});
+            console.log({error: "Login or password is incorrect"});
+            res.status(401).send();
         }
     })
 });
