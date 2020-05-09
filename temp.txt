@@ -1,0 +1,11 @@
+Key admin 2  = 4d2084403ff7b6e3eaaddba24c4524d3
+Jeton admin 2 = 428e4779cb7c9480f9076faafb5652ebb7e34130cace3074bee458a2e62a606c
+
+
+Id boardAndroid = 5e930d31bf6c147b0198371f
+Id boardFlutter = 5e930d48736e2a8d2236cd94
+Id boardIos = 5e930d1bfad6a742133c3f1f
+
+Id listDebug boardAndroid = 5eb56e17738b8434c33c3e57
+Id listDebug boardFlutter = 5eb6a36b92d7f26f8f63fdd2
+Id listDebug boardIos = 5eb6a39114a46d6925a8fee1

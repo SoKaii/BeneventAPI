@@ -336,7 +336,7 @@ app.patch('/feedback/:id', function (req, res) {
         values: [status, id]
     }, function (err, result, fields) {
         if (err) {
-            res.status(500).send({error: "Internal Server Eroor"});
+            res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
         res.status(200).send(JSON.stringify(result));
@@ -344,6 +344,107 @@ app.patch('/feedback/:id', function (req, res) {
 });
 
 // JAVA ROUTES
+
+app.post('/trello/feedback', async function (req, res) {
+    const { appli } = req.body;
+    const { idfe } = req.body;
+    const { key } = req.body;
+    const { token } = req.body;
+    const { name } = req.body;
+    const { desc } = req.body;
+
+    let urlAndroid = 'https://api.trello.com/1/cards?idList=5eb56e17738b8434c33c3e57&key='+key+'&token='+token+'&name='+name+'&desc='+desc;
+    let urlFlutter = 'https://api.trello.com/1/cards?idList=5eb6a36b92d7f26f8f63fdd2&key='+key+'&token='+token+'&name='+name+'&desc='+desc;
+    let urlIos = 'https://api.trello.com/1/cards?idList=5eb6a39114a46d6925a8fee1&key='+key+'&token='+token+'&name='+name+'&desc='+desc;
+
+    if (appli == "ANDROID") {
+        fetch(urlAndroid, {
+            method: 'POST'
+        })
+            .then(response => {
+                console.log(
+                    `Response: ${response.status} ${response.statusText}`
+                );
+                return response.text();
+            })
+            .then(text => {
+                var result = JSON.parse(text);
+                var idtrello = result.id;
+                console.log(result);
+                console.log(result.id);
+
+                con.query({
+                    sql: 'UPDATE `feedback` SET `idtrello` = ? WHERE `idfe` = ?',
+                    values: [idtrello, idfe]
+                }, function (err, result, fields) {
+                    if (err) {
+                        res.status(500).send({error: "Internal Server Error"});
+                    }
+                    console.log(result);
+                    res.status(200).send(result);
+                });
+            })
+            .catch(err => console.error(err));
+    }
+    if (appli == "FLUTTER") {
+        fetch(urlFlutter, {
+            method: 'POST'
+        })
+            .then(response => {
+                console.log(
+                    `Response: ${response.status} ${response.statusText}`
+                );
+                return response.text();
+            })
+            .then(text => {
+                var result = JSON.parse(text);
+                var idtrello = result.id;
+                console.log(result);
+                console.log(result.id);
+
+                con.query({
+                    sql: 'UPDATE `feedback` SET `idtrello` = ? WHERE `idfe` = ?',
+                    values: [idtrello, idfe]
+                }, function (err, result, fields) {
+                    if (err) {
+                        res.status(500).send({error: "Internal Server Error"});
+                    }
+                    console.log(result);
+                    res.status(200).send(result);
+                });
+            })
+            .catch(err => console.error(err));
+    }
+    if (appli == "IOS") {
+        fetch(urlIos, {
+            method: 'POST'
+        })
+            .then(response => {
+                console.log(
+                    `Response: ${response.status} ${response.statusText}`
+                );
+                return response.text();
+            })
+            .then(text => {
+                var result = JSON.parse(text);
+                var idtrello = result.id;
+                console.log(result);
+                console.log(result.id);
+
+                con.query({
+                    sql: 'UPDATE `feedback` SET `idtrello` = ? WHERE `idfe` = ?',
+                    values: [idtrello, idfe]
+                }, function (err, result, fields) {
+                    if (err) {
+                        res.status(500).send({error: "Internal Server Error"});
+                    }
+                    console.log(result);
+                    res.status(200).send(result);
+                });
+            })
+            .catch(err => console.error(err));
+    }
+});
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000 !');

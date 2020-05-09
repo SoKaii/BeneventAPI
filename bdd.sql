@@ -153,6 +153,7 @@ CREATE TABLE feedback(
         content Text NOT NULL ,
         date    Datetime NOT NULL ,
         status  Varchar (50) NOT NULL ,
+        idtrello Varchar (50) ,
         idas    Int ,
         idty    Int NOT NULL ,
         idu     Int ,
