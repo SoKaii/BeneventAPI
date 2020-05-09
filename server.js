@@ -1,25 +1,29 @@
 const express = require('express');
 const mysql = require('mysql');
+const fetch = require('node-fetch');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const config = require('./config.js')
+const config = require('./config.js');
 const con = mysql.createConnection({
-    host : config.host,
-    user: config.user,  //user mysql
-    password: config.password,  //password mysql
-    database: config.database //db mysql
+    host: config.host,
+    user: config.user, //user mysql
+    password: config.password, //password mysql
+    database: config.database //database mysql
 });
+
 app.use(express.json());
 
 con.connect( function(err) {
     if (err) throw err;
-    console.log('Connected!');
+    console.log('Connected !');
 });
 
 app.get('/', function (req, res) {
-    res.send('Hello World!')
+    res.send('Hello World !')
 });
+
+// USER ROUTES
 
 app.post('/signup/user', async function (req, res) {
     const { name } = req.body;
@@ -29,7 +33,7 @@ app.post('/signup/user', async function (req, res) {
     const { password } = req.body;
 
     await con.query({
-        sql: 'INSERT INTO user (name, firstname, age, email, password) VALUES (?,?,?,?,?)',
+        sql: 'INSERT INTO `user` (`name`,`firstname`, `age`, `email`, `password`) VALUES (?,?,?,?,?)',
         values: [name, firstname, age, email, password]
     }, function (err, result, fields) {
         if (err) {
@@ -45,50 +49,6 @@ app.post('/signup/user', async function (req, res) {
     });
 });
 
-app.post('/signup/association', async function (req, res) {
-    const { name } = req.body;
-    const { email } = req.body;
-    const { password } = req.body;
-    const { idcat } = req.body;
-
-    await con.query({
-        sql: 'INSERT INTO association (name, email, password, idcat) VALUES (?,?,?,?)',
-        values: [name, email, password, idcat]
-    }, function (err, result, fields) {
-        if (err) {
-            if (err.code == "ER_DUP_ENTRY") {
-                res.status(400).send({error: "email/name already exist"});
-            } else {
-                res.status(400).send(err);
-            }
-        } else {
-            console.log(result);
-            res.status(201).send(result);
-        }
-    });
-});
-
-app.post('/signin/admin', async function (req, res) {
-    const { login } = req.body;
-    const { password } = req.body;
-
-    await con.query({
-        sql: 'SELECT * FROM `admin` WHERE `login` = ? AND `password` = ?',
-        values: [login, password]
-    }, function (err, result, fields) {
-        if (err) {
-            res.status(500).send({error: "Internal Server Error"});
-        }
-        if(result.length > 0) {
-            console.log(result[0]);
-            res.status(200).send(result[0]);
-        } else {
-            console.log({error: "Login or password is incorrect"});
-            res.status(401).send();
-        }
-    })
-});
-
 app.post('/signin/user', async function (req, res) {
     const { email } = req.body;
     const { password } = req.body;
@@ -98,37 +58,16 @@ app.post('/signin/user', async function (req, res) {
         values: [email, password]
     }, function (err, result, fields) {
         if (err) {
-            res.status(500).send({error: "Internal Server Error"})
+            res.status(500).send({error: "Internal Server Error"});
         }
-        if(result.length > 0) {
+        if (result.length > 0) {
             console.log(result);
             res.status(200).send(result);
         } else {
             console.log(result);
             res.status(401).send({error: "Email or password is incorrect"});
         }
-    })
-});
-
-app.post('/signin/association', async function (req, res) {
-    const { email } = req.body;
-    const { password } = req.body;
-
-    await con.query({
-        sql: 'SELECT * FROM `association` WHERE `email` = ? AND `password` = ?',
-        values: [email, password]
-    }, function (err, result, fields) {
-        if (err) {
-            res.status(500).send({error: "Internal Server Error"})
-        }
-        if(result.length > 0) {
-            console.log(result);
-            res.status(200).send(result);
-        } else {
-            console.log(result);
-            res.status(401).send({error: "Email or password is incorrect"});
-        }
-    })
+    });
 });
 
 app.get('/users', function (req, res) {
@@ -136,76 +75,7 @@ app.get('/users', function (req, res) {
         sql: 'SELECT * FROM `user`'
     }, function (err, result, fields) {
         if (err) {
-            res.status(500).send({error: "Internal Server Error"})
-        }
-        console.log(result);
-        res.status(200).send(result);
-    });
-});
-
-app.get('/associations', function (req, res) {
-    con.query({
-        sql: 'SELECT * FROM `association`'
-    }, function (err, result, fields) {
-        if (err) {
-            res.status(500).send({error: "Internal Server Error"})
-        }
-        console.log(result);
-        res.status(200).send(result);
-    });
-});
-
-app.get('/category', function (req, res) {
-    con.query({
-        sql: 'SELECT * FROM `category`'
-    }, function (err, result, fields) {
-        if (err) {
-            res.status(500).send({error: "Internal Server Error"})
-        }
-        console.log(result);
-        res.status(200).send(result);
-    });
-});
-
-app.get('/feedback/:idty', function (req, res) {
-    const { idty } = req.params;
-
-    con.query( {
-        sql: 'SELECT * FROM `feedback` WHERE `idty` = ?',
-        values: [idty]
-    }, function (err, result, fields){
-        if (err) {
-            res.status(500).send({error: "Internal Server Error"})
-        }
-        console.log(result);
-        res.status(200).send(result);
-    });
-});
-
-app.get('/association/:idas', function (req, res) {
-    const { idas } = req.params;
-
-    con.query({
-        sql: 'SELECT * FROM `association` WHERE `idas` = ?',
-        values: [idas]
-    }, function (err, result, fields) {
-        if (err) {
-            res.status(500).send({error: "Internal Server Error"})
-        }
-        console.log(result);
-        res.status(200).send(result);
-    });
-});
-
-app.get('/association/category/:idcat', function (req, res) {
-    const { idcat } = req.params;
-
-    con.query({
-        sql: 'SELECT * FROM `association` WHERE `idcat` = ?',
-        values: [idcat]
-    }, function (err, result, fields) {
-        if (err) {
-            res.status(500).send({error: "Internal Server Error"})
+            res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
         res.status(200).send(result);
@@ -220,7 +90,7 @@ app.get('/user/:id', function (req, res) {
         values: [id]
     }, function (err, result, fields) {
         if (err) {
-            res.status(500).send({error: "Internal Server Error"})
+            res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
         res.status(200).send(result);
@@ -236,11 +106,114 @@ app.patch('/user/:id', function (req, res) {
     const { id } = req.params;
 
     con.query({
-        sql: 'Update `user` SET `password` = ?, `phone` = ?, `profilpicture` = ?, `address` = ?, `description` = ? WHERE `idu` = ?',
+        sql: 'UPDATE `user` SET `password` = ?, `phone` = ?, `profilpicture` = ?, `address` = ?, `description` = ? WHERE `idu` = ?',
         values: [password, phone, profilpicture, address, description, id]
-    },function (err, result, fields) {
+    }, function (err, result, fields) {
         if (err) {
-            res.status(500).send({error: "Internal Server Error"})
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+app.delete('/user/:id', function (req, res) {
+    const { id } = req.params;
+
+    con.query({
+        sql: 'DELETE FROM `user` WHERE `idu` = ?',
+        values: [id]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+// ASSOCIATION ROUTES
+
+app.post('/signup/association', async function (req, res) {
+    const { name } = req.body;
+    const { email } = req.body;
+    const { password } = req.body;
+    const { idcat } = req.body;
+
+    await con.query({
+        sql: 'INSERT INTO `association` (`name`, `email`, `password`, `idcat`) VALUES (?,?,?,?)',
+        values: [name, email, password, idcat]
+    }, function (err, result, fields) {
+        if (err) {
+            if (err.code == "ER_DUP_ENTRY") {
+                res.status(400).send({error: "Email/Name already exist"});
+            } else {
+                res.status(400).send(err);
+            }
+        } else {
+            console.log(result);
+            res.status(201).send(result);
+        }
+    });
+});
+
+app.post('/signin/association', async function (req, res) {
+    const { email } = req.body;
+    const { password } = req.body;
+
+    await con.query({
+        sql: 'SELECT * FROM `association` WHERE `email` = ? AND `password` = ?',
+        values: [email, password]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        if (result.length > 0) {
+            console.log(result);
+            res.status(200).send(result);
+        } else {
+            console.log(result);
+            res.status(401).send({error: "Email or password is incorrect"});
+        }
+    });
+});
+
+app.get('/associations', function (res, res) {
+    con.query({
+        sql: 'SELECT * FROM `association`'
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+app.get('/association/:idas', function (req, res) {
+    const { idas } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `association` WHERE `idas` = ?',
+        values: [idas]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+app.get('/associations/category/:idcat', function (req, res) {
+    const { idcat } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `association` WHERE `idcat` = ?',
+        values: [idcat]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
         res.status(200).send(result);
@@ -260,26 +233,11 @@ app.patch('/association/:id', function (req, res) {
         values: [logo, password, phone, website, support, id]
     }, function (err, result, fields) {
         if (err) {
-            res.status(500).send({error: "Internal Server Error"})
+            res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
         res.status(200).send(result);
     });
-});
-
-app.delete('/user/:id', function (req, res) {
-    const { id } = req.params;
-
-    con.query({
-        sql: 'DELETE FROM `user` WHERE `idu` = ?',
-        values: [id]
-    }, function (err, result, fields) {
-        if (err) {
-            res.status(500).send({error: "Internal Server Error"})
-        }
-        console.log(result);
-        res.status(200).send(result);
-    })
 });
 
 app.delete('/association/:id', function (req, res) {
@@ -290,14 +248,103 @@ app.delete('/association/:id', function (req, res) {
         values: [id]
     }, function (err, result, fields) {
         if (err) {
-            res.status(500).send({error: "Internal Server Error"})
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+    });
+});
+
+// ADMIN ROUTES
+
+app.post('/signin/admin', async function (req, res) {
+    const { login } = req.body;
+    const { password } = req.body;
+
+    await con.query({
+        sql: 'SELECT * FROM `admin` WHERE `login` = ? AND `password` = ?',
+        values: [login, password]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        if (result.length > 0) {
+            console.log(result);
+            res.status(200).send(JSON.stringify(result));
+        } else {
+            console.log({error: "Login or password is incorrect"});
+            res.status(401).send();
+        }
+    });
+});
+
+// CATEGORY ROUTES
+
+app.get('/category', function (req, res) {
+    con.query({
+        sql: 'SELECT * FROM `category`'
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
         res.status(200).send(result);
-    })
-})
+    });
+});
 
+// FEEDBACK ROUTES
+
+app.get('/feedback/:idty', function (req, res) {
+    const { idty } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `feedback` WHERE `idty` = ?',
+        values: [idty]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(JSON.stringify(result));
+    });
+});
+
+app.post('/feedback', function (req, res) {
+    const { title } = req.body;
+    const { content } = req.body;
+    const { date } = req.body;
+    const { status } = req.body;
+    const { idty } = req.body;
+
+    con.query({
+        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `status`, `idty`) VALUES (?,?,?,?,?)',
+        values: [title, content, date, status, idty]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+app.patch('/feedback/:id', function (req, res) {
+    const { status } = req.body;
+    const { id } = req.params;
+
+    con.query({
+        sql: 'UPDATE `feedback` SET `status` = ? WHERE `idfe` = ?',
+        values: [status, id]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Eroor"});
+        }
+        console.log(result);
+        res.status(200).send(JSON.stringify(result));
+    });
+});
+
+// JAVA ROUTES
 
 app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+    console.log('Example app listening on port 3000 !');
 });
