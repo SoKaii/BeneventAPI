@@ -268,8 +268,8 @@ app.post('/signin/admin', async function (req, res) {
             res.status(500).send({error: "Internal Server Error"});
         }
         if (result.length > 0) {
-            console.log(result);
-            res.status(200).send(JSON.stringify(result));
+            console.log(JSON.stringify(result[0]));
+            res.status(200).send(JSON.stringify(result[0]));
         } else {
             console.log({error: "Login or password is incorrect"});
             res.status(401).send();
@@ -303,7 +303,7 @@ app.get('/feedback/:idty', function (req, res) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
         }
-        console.log(result);
+        console.log(JSON.stringify(result));
         res.status(200).send(JSON.stringify(result));
     });
 });
