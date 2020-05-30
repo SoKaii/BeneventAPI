@@ -154,6 +154,7 @@ CREATE TABLE feedback(
         date    Datetime NOT NULL ,
         status  Varchar (50) NOT NULL ,
         idtrello Varchar (50) ,
+	plateform Varchar (50),
         idas    Int ,
         idty    Int NOT NULL ,
         idu     Int ,
@@ -166,9 +167,9 @@ CREATE TABLE feedback(
 	,CONSTRAINT feedback_admin2_FK FOREIGN KEY (ida) REFERENCES admin(ida)
 )ENGINE=InnoDB;
 
-INSERT INTO feedback(title,content,date,status,idty,idu) values("Launch Screen Bug","black screen during 5s on launching app",sysdate(),"",1,1);
-INSERT INTO feedback(title,content,date,status,idty,idas) values("cannot remove my account","when i remove my account they said ok but i could again connect me",sysdate(),"",1,2);
-INSERT INTO feedback(title,content,date,status,idty,idu) values("improvement of login screen","maybe that gonna be better if login button was bigger",sysdate(),"",2,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("Launch Screen Bug","black screen during 5s on launching app",sysdate(),"ANDROID","",1,1);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("cannot remove my account","when i remove my account they said ok but i could again connect me",sysdate(),"FLUTTER","",1,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("improvement of login screen","maybe that gonna be better if login button was bigger",sysdate(),"IOS","",2,2);
 
 #------------------------------------------------------------
 # Table: followers
