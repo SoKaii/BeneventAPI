@@ -102,12 +102,12 @@ app.patch('/user/:id', function (req, res) {
     const { phone } = req.body;
     const { profilpicture } = req.body;
     const { address } = req.body;
-    const { description } = req.body;
+    const { bio } = req.body;
     const { id } = req.params;
 
     con.query({
-        sql: 'UPDATE `user` SET `password` = ?, `phone` = ?, `profilpicture` = ?, `address` = ?, `description` = ? WHERE `idu` = ?',
-        values: [password, phone, profilpicture, address, description, id]
+        sql: 'UPDATE `user` SET `password` = ?, `phone` = ?, `profilpicture` = ?, `address` = ?, `bio` = ? WHERE `idu` = ?',
+        values: [password, phone, profilpicture, address, bio, id]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
