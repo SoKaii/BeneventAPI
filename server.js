@@ -312,12 +312,11 @@ app.post('/feedback', function (req, res) {
     const { title } = req.body;
     const { content } = req.body;
     const { date } = req.body;
-    const { status } = req.body;
     const { idty } = req.body;
 
     con.query({
-        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `status`, `idty`) VALUES (?,?,?,?,?)',
-        values: [title, content, date, status, idty]
+        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`,  `idty`) VALUES (?,?,?,?)',
+        values: [title, content, date, idty]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -328,11 +327,10 @@ app.post('/feedback', function (req, res) {
 });
 
 app.patch('/feedback/:id', function (req, res) {
-    const { status } = req.body;
-    const { id } = req.params;
+    const { idfe } = req.params;
 
     con.query({
-        sql: 'UPDATE `feedback` SET `status` = ? WHERE `idfe` = ?',
+        sql: 'UPDATE `feedback` SET `status` = \'validate\' WHERE `idfe` = ?',
         values: [status, id]
     }, function (err, result, fields) {
         if (err) {
@@ -374,7 +372,7 @@ app.post('/trello/feedback', async function (req, res) {
                 console.log(result.id);
 
                 con.query({
-                    sql: 'UPDATE `feedback` SET `idtrello` = ? WHERE `idfe` = ?',
+                    sql: 'UPDATE `feedback` SET `idtrello` = ?, status = \'pending\' WHERE `idfe` = ?',
                     values: [idtrello, idfe]
                 }, function (err, result, fields) {
                     if (err) {
@@ -394,7 +392,7 @@ app.post('/trello/feedback', async function (req, res) {
                 console.log(
                     `Response: ${response.status} ${response.statusText}`
                 );
-                return response.text();
+                return response.status(response.status).text().send();
             })
             .then(text => {
                 var result = JSON.parse(text);
@@ -403,7 +401,7 @@ app.post('/trello/feedback', async function (req, res) {
                 console.log(result.id);
 
                 con.query({
-                    sql: 'UPDATE `feedback` SET `idtrello` = ? WHERE `idfe` = ?',
+                    sql: 'UPDATE `feedback` SET `idtrello` = ?, status = \'pending\' WHERE `idfe` = ?',
                     values: [idtrello, idfe]
                 }, function (err, result, fields) {
                     if (err) {
@@ -432,7 +430,7 @@ app.post('/trello/feedback', async function (req, res) {
                 console.log(result.id);
 
                 con.query({
-                    sql: 'UPDATE `feedback` SET `idtrello` = ? WHERE `idfe` = ?',
+                    sql: 'UPDATE `feedback` SET `idtrello` = ? , status = \'pending\' WHERE `idfe` = ?',
                     values: [idtrello, idfe]
                 }, function (err, result, fields) {
                     if (err) {
