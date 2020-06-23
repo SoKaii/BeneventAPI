@@ -33,9 +33,12 @@ CREATE TABLE category(
         name  Varchar (255) NOT NULL
 	,CONSTRAINT category_PK PRIMARY KEY (idcat)
 )ENGINE=InnoDB;
-INSERT INTO category(name) values("festival");
-INSERT INTO category(name) values("humanitary");
-INSERT INTO category(name) values("homeless");
+INSERT INTO category(name) values("Animalière");
+INSERT INTO category(name) values("Culturelle");
+INSERT INTO category(name) values("Environnementale");
+INSERT INTO category(name) values("Humanitaire");
+INSERT INTO category(name) values("Musicale");
+INSERT INTO category(name) values("Sportive");
 
 #------------------------------------------------------------
 # Table: association
