@@ -444,6 +444,50 @@ app.post('/trello/feedback', async function (req, res) {
     }
 });
 
+// FEED ROUTES
+
+app.get('/posts', function (req, res) {
+    con.query({
+        sql: 'SELECT * FROM `posts`'
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+}); // récupère tous les posts
+
+app.get('/post/asso/:idas', function (req, res) {
+    const { idas } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `posts` WHERE `idev` = ( SELECT `idev` FROM `event` WHERE `idas` = ?)',
+        values: [idas]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+}); // récupère tous les posts des évènements d'une asso (user+asso)
+
+app.get('/post/:idas', function (req, res) {
+    const { idas } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `posts` WHERE `idas` = ?',
+        values: [idas]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+}); // récupère tous les posts d'une association(Ceux écris par ces derniers)
+
 app.listen(3000, function () {
     console.log('Example app listening on port 3000 !');
 });
