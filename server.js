@@ -344,7 +344,7 @@ app.patch('/feedback/:id', function (req, res) {
 app.get('/event/:idev',function (req,res){
   const { idev } = req.params;
   con.query({
-    sql: 'select * from `event` where `idev` = ?'
+    sql: 'select * from `event` where `idev` = ?',
     values: [idev]
   }, function(err,result,fields){
     if(err){
