@@ -291,6 +291,19 @@ app.get('/category', function (req, res) {
     });
 });
 
+app.get('/category/:idcat', function (req, res) {
+    con.query({
+        sql: 'SELECT * FROM `category` WHERE `idcat` = ?',
+        values: [idcat]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
 // FEEDBACK ROUTES
 
 app.get('/feedback/:idty', function (req, res) {
@@ -326,12 +339,11 @@ app.post('/feedback', function (req, res) {
     });
 });
 
-app.patch('/feedback/:id', function (req, res) {
-    const { idfe } = req.params;
+app.patch('/feedback/:idfe', function (req, res) {
 
     con.query({
         sql: 'UPDATE `feedback` SET `status` = \'validate\' WHERE `idfe` = ?',
-        values: [status, id]
+        values: [status, idfe]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -501,6 +513,87 @@ app.get('/post/:idas', function (req, res) {
         res.status(200).send(result);
     });
 }); // récupère tous les posts d'une association(Ceux écris par ces derniers)
+
+// EVENT ROUTES
+
+app.get('/events', function (req, res) {
+    con.query({
+        sql: 'SELECT * FROM `event`'
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+app.get('/event/:idev', function (req, res) {
+    con.query({
+        sql: 'SELECT * FROM `event` WHERE `idev` = ?',
+        values: [idev]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+// MEDIA ROUTES
+
+app.get('/medias', function (req, res) {
+    con.query({
+        sql: 'SELECT * FROM `media`'
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+app.get('/media/:idme', function (req, res) {
+    con.query({
+        sql: 'SELECT * FROM `media` WHERE `idme` = ?',
+        values: [idme]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+// TYPE ROUTES
+
+app.get('/types', function (req, res) {
+    con.query({
+        sql: 'SELECT * FROM `type`'
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+app.get('/type/:idty', function (req, res) {
+    con.query({
+        sql: 'SELECT * FROM `type` WHERE `idty` = ?',
+        values: [idty]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000 !');

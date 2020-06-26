@@ -33,6 +33,7 @@ CREATE TABLE category(
         name  Varchar (255) NOT NULL
 	,CONSTRAINT category_PK PRIMARY KEY (idcat)
 )ENGINE=InnoDB;
+
 INSERT INTO category(name) values("Animalière");
 INSERT INTO category(name) values("Culturelle");
 INSERT INTO category(name) values("Environnementale");
@@ -71,11 +72,11 @@ CREATE TABLE event(
         idev        Int  Auto_increment  NOT NULL ,
         name        Varchar (30) NOT NULL ,
         description Varchar (255) NOT NULL ,
-        date        Datetime NOT NULL ,
+        dateDeb        Datetime NOT NULL ,
+        dateFin        Datetime NOT NULL,
         location    Varchar (255) NOT NULL ,
-        maxbenevole Int NOT NULL ,
-        duration    Varchar (255) NOT NULL ,
-        status      Int NOT NULL,
+        maxBenevole Int NOT NULL ,
+        info    Varchar (255) NOT NULL ,
         idcat       Int NOT NULL ,
         idas        Int NOT NULL
 	,CONSTRAINT event_PK PRIMARY KEY (idev)
@@ -111,7 +112,7 @@ CREATE TABLE posts(
 CREATE TABLE media(
         idme    Int  Auto_increment  NOT NULL ,
         name    Varchar (255) NOT NULL ,
-        element Blob NOT NULL ,
+        element Varchar (255) NOT NULL ,
         idpo    Int NOT NULL
 	,CONSTRAINT media_PK PRIMARY KEY (idme)
 
@@ -128,6 +129,7 @@ CREATE TABLE type(
         name Varchar (20) NOT NULL
 	,CONSTRAINT type_PK PRIMARY KEY (idty)
 )ENGINE=InnoDB;
+
 INSERT INTO type(name) values("bug");
 INSERT INTO type(name) values("improvement");
 
