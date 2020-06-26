@@ -75,6 +75,7 @@ CREATE TABLE event(
         location    Varchar (255) NOT NULL ,
         maxbenevole Int NOT NULL ,
         duration    Varchar (255) NOT NULL ,
+        status      Int NOT NULL,
         idcat       Int NOT NULL ,
         idas        Int NOT NULL
 	,CONSTRAINT event_PK PRIMARY KEY (idev)
