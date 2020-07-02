@@ -488,7 +488,7 @@ app.get('/post/asso/:idas', function (req, res) {
     const { idas } = req.params;
 
     con.query({
-        sql: 'SELECT * FROM `posts` WHERE `idev` = ( SELECT `idev` FROM `event` WHERE `idas` = ?)',
+        sql: 'SELECT posts.idpo,posts.message,posts.date,posts.idu,posts.idas,posts.idev FROM `posts`,event WHERE posts.idev = event.idev and event.idas = ?',
         values: [idas]
     }, function (err, result, fields) {
         if (err) {
