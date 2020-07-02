@@ -529,9 +529,25 @@ app.get('/events', function (req, res) {
 });
 
 app.get('/event/:idev', function (req, res) {
+    const { idev } = req.params;
     con.query({
         sql: 'SELECT * FROM `event` WHERE `idev` = ?',
         values: [idev]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
+app.get('/events/:idas', function (req, res) {
+    const { idas } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `event` WHERE `idas` = ?',
+        values: [idas]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
