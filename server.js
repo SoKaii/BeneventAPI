@@ -10,7 +10,6 @@ const con = mysql.createConnection({
     user: config.user, //user mysql
     password: config.password, //password mysql
     database: config.database, //database mysql
-    socketPath: config.socketPath
 });
 
 app.use(express.json());
@@ -48,7 +47,7 @@ app.post('/signup/user', async function (req, res) {
             res.status(201).send(result);
         }
     });
-});
+}); // créer un nouveau user dans la bdd
 
 app.post('/signin/user', async function (req, res) {
     const { email } = req.body;
@@ -69,7 +68,7 @@ app.post('/signin/user', async function (req, res) {
             res.status(401).send({error: "Email or password is incorrect"});
         }
     });
-});
+}); // permet aux users de se connecter
 
 app.get('/users', function (req, res) {
     con.query({
@@ -81,7 +80,7 @@ app.get('/users', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer tout les users de la bdd
 
 app.get('/user/:id', function (req, res) {
     const { id } = req.params;
@@ -96,7 +95,7 @@ app.get('/user/:id', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer le user d'id
 
 app.patch('/user/:id', function (req, res) {
     const { password } = req.body;
@@ -116,7 +115,7 @@ app.patch('/user/:id', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // modifier le user d'id
 
 app.delete('/user/:id', function (req, res) {
     const { id } = req.params;
@@ -131,7 +130,7 @@ app.delete('/user/:id', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // supprimer le user d'id
 
 // ASSOCIATION ROUTES
 
@@ -156,7 +155,7 @@ app.post('/signup/association', async function (req, res) {
             res.status(201).send(result);
         }
     });
-});
+}); // créer une nouvelle association
 
 app.post('/signin/association', async function (req, res) {
     const { email } = req.body;
@@ -177,7 +176,7 @@ app.post('/signin/association', async function (req, res) {
             res.status(401).send({error: "Email or password is incorrect"});
         }
     });
-});
+}); // permet aux associations de se connecter
 
 app.get('/associations', function (res, res) {
     con.query({
@@ -189,7 +188,7 @@ app.get('/associations', function (res, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer tout les users de la bdd
 
 app.get('/association/:idas', function (req, res) {
     const { idas } = req.params;
@@ -204,7 +203,7 @@ app.get('/association/:idas', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer l'association d'id
 
 app.get('/associations/category/:idcat', function (req, res) {
     const { idcat } = req.params;
@@ -219,19 +218,19 @@ app.get('/associations/category/:idcat', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer toutes les associations d'une categorie
 
 app.patch('/association/:id', function (req, res) {
-    const { logo } = req.body;
-    const { password } = req.body;
+    const { name } = req.body;
+    const { email } = req.body;
     const { phone } = req.body;
     const { website } = req.body;
     const { support } = req.body;
     const { id } = req.params;
 
     con.query({
-        sql: 'Update `association` SET `logo` = ?, `password` = ?, `phone` = ?, `website` = ?, `support` = ? WHERE `idas` = ?',
-        values: [logo, password, phone, website, support, id]
+        sql: 'Update `association` SET `name` = ?, `email` = ?, `phone` = ?, `website` = ?, `support` = ? WHERE `idas` = ?',
+        values: [name, email, phone, website, support, id]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -239,7 +238,7 @@ app.patch('/association/:id', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // modifier l'association d'id
 
 app.delete('/association/:id', function (req, res) {
     const { id } = req.params;
@@ -253,7 +252,7 @@ app.delete('/association/:id', function (req, res) {
         }
         console.log(result);
     });
-});
+}); // supprimer l'association d'id
 
 // ADMIN ROUTES
 
@@ -276,11 +275,11 @@ app.post('/signin/admin', async function (req, res) {
             res.status(401).send();
         }
     });
-});
+}); // permet aux admins de se connecter
 
 // CATEGORY ROUTES
 
-app.get('/category', function (req, res) {
+app.get('/categories', function (req, res) {
     con.query({
         sql: 'SELECT * FROM `category`'
     }, function (err, result, fields) {
@@ -290,7 +289,7 @@ app.get('/category', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer toutes les categories
 
 app.get('/category/:idcat', function (req, res) {
     con.query({
@@ -303,7 +302,7 @@ app.get('/category/:idcat', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer le categorie d'id
 
 // FEEDBACK ROUTES
 
@@ -320,7 +319,7 @@ app.get('/feedback/:idty', function (req, res) {
         console.log(JSON.stringify(result));
         res.status(200).send(JSON.stringify(result));
     });
-});
+}); // récupérer tout les feedback d'un type
 
 app.post('/feedback', function (req, res) {
     const { title } = req.body;
@@ -338,7 +337,7 @@ app.post('/feedback', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // créer un feedback
 
 app.patch('/feedback/:idfe', function (req, res) {
 
@@ -352,23 +351,9 @@ app.patch('/feedback/:idfe', function (req, res) {
         console.log(result);
         res.status(200).send(JSON.stringify(result));
     });
-});
+}); // modifier un feedback d'id
 
-app.get('/event/:idev',function (req,res){
-  const { idev } = req.params;
-  con.query({
-    sql: 'select * from `event` where `idev` = ?',
-    values: [idev]
-  }, function(err,result,fields){
-    if(err){
-      res.status(500).send({error: "Internal Server Error"});
-    }
-    console.log(result);
-    res.status(200).send(result);
-  })
-});
-
-// JAVA ROUTES
+// TRELLO ROUTES
 
 app.post('/trello/feedback', async function (req, res) {
     const { appli } = req.body;
@@ -469,7 +454,7 @@ app.post('/trello/feedback', async function (req, res) {
             })
             .catch(err => console.error(err));
     }
-});
+}); // Ajouter un feedback sur trello
 
 // FEED ROUTES
 
@@ -483,9 +468,9 @@ app.get('/posts', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-}); // récupère tous les posts
+}); // récupérer tout les posts
 
-app.get('/post/asso/:idas', function (req, res) {
+app.get('/posts/asso/:idas', function (req, res) {
     const { idas } = req.params;
 
     con.query({
@@ -498,9 +483,9 @@ app.get('/post/asso/:idas', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-}); // récupère tous les posts des évènements d'une asso (user+asso)
+}); // récupérer tout les posts des évènements d'une asso (user+asso)
 
-app.get('/post/:idas', function (req, res) {
+app.get('/posts/:idas', function (req, res) {
     const { idas } = req.params;
 
     con.query({
@@ -513,7 +498,43 @@ app.get('/post/:idas', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-}); // récupère tous les posts d'une association(Ceux écris par ces derniers)
+}); // récupérer tout les posts d'une association (Ceux écris par ces derniers)
+
+app.post('/post/association', function (req, res) {
+    const { message } = req.body;
+    const { date } = req.body;
+    const { idas } = req.body;
+    const { idev } = req.body;
+
+    con.query({
+        sql: 'INSERT INTO `post` (`message`, `date`, `idas`, `idev`) VALUES (?,?,?,?)',
+        values: [message, date, idas, idev]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+}); // créer des posts depuis un compte association
+
+app.post('/post/user', function (req, res) {
+    const { message } = req.body;
+    const { date } = req.body;
+    const { idu } = req.body;
+    const { idev } = req.body;
+
+    con.query({
+        sql: 'INSERT INTO `post` (`message`, `date`, `idu`, `idev`) VALUES (?,?,?,?)',
+        values: [message, date, idu, idev]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+}); // créer des posts depuis un compte user
 
 // EVENT ROUTES
 
@@ -527,7 +548,7 @@ app.get('/events', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer tout les évènements
 
 app.get('/event/:idev', function (req, res) {
     const { idev } = req.params;
@@ -541,7 +562,7 @@ app.get('/event/:idev', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer un évènement d'id
 
 app.get('/events/:idas', function (req, res) {
     const { idas } = req.params;
@@ -556,7 +577,7 @@ app.get('/events/:idas', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer tout les évènements d'une association
 
 // MEDIA ROUTES
 
@@ -570,7 +591,7 @@ app.get('/medias', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer tout les médias
 
 app.get('/media/:idme', function (req, res) {
     con.query({
@@ -583,7 +604,7 @@ app.get('/media/:idme', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer le média d'id
 
 // TYPE ROUTES
 
@@ -597,7 +618,7 @@ app.get('/types', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer tout les types
 
 app.get('/type/:idty', function (req, res) {
     con.query({
@@ -610,7 +631,7 @@ app.get('/type/:idty', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
+}); // récupérer le type d'id
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000 !');
