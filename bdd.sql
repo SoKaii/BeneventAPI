@@ -17,7 +17,7 @@ CREATE TABLE user(
         phone         Varchar (12) ,
         profilpicture Varchar (255) ,
         address       Text ,
-        bio   Varchar (250)
+        description  Varchar (250)
 	,CONSTRAINT user_PK PRIMARY KEY (idu)
 )ENGINE=InnoDB;
 
