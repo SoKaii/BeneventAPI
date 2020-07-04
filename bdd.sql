@@ -11,11 +11,11 @@ CREATE TABLE user(
         idu           Int  Auto_increment  NOT NULL ,
         name          Varchar (50) NOT NULL ,
         firstname     Varchar (50) NOT NULL ,
-		age			Date NOT NULL,
-        email         Varchar (100) NOT NULL UNIQUE,
-		password      Varchar (50) NOT NULL,
-        phone         Varchar(12) ,
-        profilpicture Blob ,
+		age			Date NOT NULL ,
+        email         Varchar (100) NOT NULL UNIQUE ,
+		password      Varchar (50) NOT NULL ,
+        phone         Varchar (12) ,
+        profilpicture Varchar (255) ,
         address       Text ,
         bio   Varchar (250)
 	,CONSTRAINT user_PK PRIMARY KEY (idu)
