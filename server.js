@@ -507,7 +507,7 @@ app.post('/post/association', function (req, res) {
     const { idev } = req.body;
 
     con.query({
-        sql: 'INSERT INTO `post` (`message`, `date`, `idas`, `idev`) VALUES (?,?,?,?)',
+        sql: 'INSERT INTO `posts` (`message`, `date`, `idas`, `idev`) VALUES (?,?,?,?)',
         values: [message, date, idas, idev]
     }, function (err, result, fields) {
         if (err) {
