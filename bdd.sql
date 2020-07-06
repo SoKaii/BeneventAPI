@@ -198,10 +198,10 @@ CREATE TABLE followers(
 CREATE TABLE participation(
         idev        Int NOT NULL ,
         idu         Int NOT NULL ,
-        participate Bool NOT NULL ,
-        status      Bool NOT NULL ,
-        startdate   Datetime NOT NULL ,
-        enddate     Datetime NOT NULL
+        participate Bool NULL ,
+        status      Bool NULL ,
+        startdate   Datetime NULL ,
+        enddate     Datetime NULL
 	,CONSTRAINT participation_PK PRIMARY KEY (idev,idu)
 
 	,CONSTRAINT participation_event_FK FOREIGN KEY (idev) REFERENCES event(idev)
