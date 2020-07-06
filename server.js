@@ -345,7 +345,6 @@ app.post('/feedback', function (req, res) {
 
 app.put('/feedback/:idfe', function (req, res) {
     const { idfe } = req.params;
-
     con.query({
         sql: 'UPDATE `feedback` SET `status` = \'validate\' WHERE `idfe` = ?',
         values: [idfe]
