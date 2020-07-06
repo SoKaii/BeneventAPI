@@ -324,7 +324,7 @@ app.get('/feedback/:idty', function (req, res) {
 app.post('/feedback', function (req, res) {
     const { title } = req.body;
     const { content } = req.body;
-    const { date } = req.body;
+    const { plateform } = req.body;
     const { idty } = req.body;
     const { idu } = req.body
 
