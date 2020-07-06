@@ -324,7 +324,7 @@ app.get('/feedback/:idty', function (req, res) {
 app.post('/feedback', function (req, res) {
     const { title } = req.body;
     const { content } = req.body;
-    const { date } = req.body;
+    const { plateform } = req.body;
     const { idty } = req.body;
     const { idu } = req.body
 
@@ -634,6 +634,81 @@ app.get('/type/:idty', function (req, res) {
         res.status(200).send(result);
     });
 }); // récupérer le type d'id
+
+app.post('/participate',function(req, res){
+  const { idev } = req.body;
+  const { idu } = req.body;
+  con.query({
+      sql: 'INSERT INTO `participation`(`idev`,`idu`,`participate`,`status`) VALUES(?,?,0,1)',
+      values: [idev,idu]
+  }, function (err, result, fields) {
+      if (err) {
+          res.status(500).send({error: err});
+      }
+      console.log(result);
+      res.status(200).send();
+  });
+});
+
+app.patch('/participaterefuse',function(req, res){
+  const { idev } = req.body;
+  const { idu } = req.body;
+  const { status } = req.body;
+
+  if (status == 1) {
+    con.query({
+        sql: 'UPDATE `participation` SET `status`=0,participate=0 WHERE `idev` = ? AND `idu` = ?',
+        values: [idev,idu]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send();
+    });
+  }else{
+      res.status(400).send();
+  }
+});
+
+app.patch('/participatestart',function (req, res){
+  const { idev } = req.body;
+  const { idu } = req.body;
+  const { status } = req.body;
+  if (status == 1) {
+    con.query({
+        sql: 'UPDATE `participation` SET `startdate`=now(),participate=1 WHERE `idev` = ? AND `idu` = ?',
+        values: [idev,idu]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send();
+    });
+  }else{
+      res.status(400).send();
+  }
+});
+app.patch('/participateend',function (req, res){
+  const { idev } = req.body;
+  const { idu } = req.body;
+  const { status } = req.body;
+  if (status == 1) {
+    con.query({
+        sql: 'UPDATE `participation` SET `enddate`=now() WHERE `idev` = ? AND `idu` = ?',
+        values: [idev,idu]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send();
+    });
+  }else{
+      res.status(400).send();
+  }
+});
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000 !');
