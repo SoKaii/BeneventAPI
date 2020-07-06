@@ -33,7 +33,7 @@ app.post('/signup/user', async function (req, res) {
     const { password } = req.body;
 
     await con.query({
-        sql: 'INSERT INTO `user` (`name`,`firstname`, `age`, `email`, `password`) VALUES (?,?,?,?,?)',
+        sql: 'INSERT INTO `user` (`name`, `firstname`, `age`, `email`, `password`) VALUES (?,?,?,?,?)',
         values: [name, firstname, age, email, password]
     }, function (err, result, fields) {
         if (err) {
@@ -324,13 +324,15 @@ app.get('/feedback/:idty', function (req, res) {
 app.post('/feedback', function (req, res) {
     const { title } = req.body;
     const { content } = req.body;
+    const { date } = req.body;
+    const { status } = req.body;
     const { plateform } = req.body;
     const { idty } = req.body;
     const { idu } = req.body
 
     con.query({
-        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`,  `idty`,`plateform`,`status`,`idu`) VALUES (?,?,curdate(),?,?,\'\',?)',
-        values: [title, content, idty, plateform,idu]
+        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `idty`, `plateform`, `status`, `idu`) VALUES (?,?,?,?,?,?,?)',
+        values: [title, content, date, idty, plateform, status, idu]
     }, function (err, result, fields) {
         if (err) {
           console.log(err);
@@ -581,49 +583,97 @@ app.get('/events/:idas', function (req, res) {
     });
 }); // récupérer tout les évènements d'une association
 
+app.post('/event', function (req, res) {
+    const { name } = req.body;
+    const { description } = req.body;
+    const { dateDeb } = req.body;
+    const { dateFin } = req.body;
+    const { location } = req.body;
+    const { maxBenevole } = req.body;
+    const { idcat } = req.body;
+    const { idas } = req.body;
 
-app.post('/participate',function(req, res){
-  const { idev } = req.body;
-  const { idu } = req.body;
-  con.query({
-      sql: 'INSERT INTO `participation`(`idev`,`idu`,`participate`,`status`) VALUES(?,?,0,1)',
-      values: [idev,idu]
-  }, function (err, result, fields) {
-      if (err) {
-          res.status(500).send({error: err});
-      }
-      console.log(result);
-      res.status(200).send();
-  });
-});
-
-app.patch('/participate/refuse',function(req, res){
-  const { idev } = req.body;
-  const { idu } = req.body;
-  const { status } = req.body;
-
-  if (status == 1) {
     con.query({
-        sql: 'UPDATE `participation` SET `status`=0,participate=0 WHERE `idev` = ? AND `idu` = ?',
-        values: [idev,idu]
+        sql: 'INSERT INTO `event` (`name`, `description`, `dateDeb`, `dateFin`, `location`, `maxBenevole`, `idcat`, `idas`) VALUES (?,?,?,?,?,?,?,?)',
+        values: [name, description, dateDeb, dateFin, location, maxBenevole, idcat, idas]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
+        res.status(200).send(result);
+    });
+}); // créer des events depuis un compte asso
+
+app.patch('/event/:idev', function (req, res) {
+    const { idev } = req.params;
+    const { description } = req.body;
+    const { dateDeb } = req.body;
+    const { dateFin } = req.body;
+    const { location } = req.body;
+    const { maxBenevole } = req.body;
+
+    con.query({
+        sql: 'UPDATE `event` SET `description` = ?, `dateDeb` = ?, `dateFin` = ?, `location` = ?, `maxBenevole` = ? WHERE `idev` = ?',
+        values: [description, dateDeb, dateFin, location, maxBenevole, idev]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+}); // modifier un event d'id
+
+// PARTICIPATION ROUTES
+
+app.post('/participate',function (req, res) {
+    const { idev } = req.body;
+    const { idu } = req.body;
+    const { participate } = req.body;
+    const { status } = req.body;
+
+    con.query({
+        sql: 'INSERT INTO `participation` (`idev`,`idu`,`participate`,`status`) VALUES(?,?,?,?)',
+        values: [idev, idu, participate, status]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: err});
+        }
+        console.log(result);
         res.status(200).send();
     });
-  }else{
-      res.status(400).send();
-  }
-});
+}); // indiquer que l'on participe à un évènement
 
+app.patch('/participate/refuse',function (req, res) {
+    const { status } = req.body;
+    const { participate } = req.body;
+    const { idev } = req.body;
+    const { idu } = req.body;
 
-app.patch('/participate/startstop',function (req, res){
-  const { idev } = req.body;
-  const { idu } = req.body;
-  const { status } = req.body;
-  console.log("test");
+    if (status == 1) {
+        con.query({
+            sql: 'UPDATE `participation` SET `status` = ?,`participate` = ? WHERE `idev` = ? AND `idu` = ?',
+            values: [status, participate, idev, idu]
+        }, function (err, result, fields) {
+            if (err) {
+                res.status(500).send({error: "Internal Server Error"});
+            }
+            console.log(result);
+            res.status(200).send();
+        });
+    } else {
+        res.status(400).send();
+    }
+}); // empécher un utilisateur qui c'est de-inscrit de participer
+
+app.patch('/participate/status',function (req, res) {
+    const { idev } = req.body;
+    const { idu } = req.body;
+    const { status } = req.body;
+    const { startdate } = req.body;
+    const { enddate } = req.body;
+    const { participate } = req.body;
 
     con.query({
         sql: 'SELECT `startdate` FROM `participation` WHERE `idev` = ? and `idu` = ?',
@@ -633,11 +683,11 @@ app.patch('/participate/startstop',function (req, res){
             res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result[0].startdate);
-        if (result[0].startdate==null) {
+        if (result[0].startdate == null) {
           if (status == 1) {
             con.query({
-                sql: 'UPDATE `participation` SET `startdate`=now(),participate=1 WHERE `idev` = ? AND `idu` = ?',
-                values: [idev,idu]
+                sql: 'UPDATE `participation` SET `startdate` = ?, participate = ? WHERE `idev` = ? AND `idu` = ?',
+                values: [startdate, participate, idev, idu]
             }, function (err, result, fields) {
                 if (err) {
                     res.status(500).send({error: "Internal Server Error"});
@@ -645,14 +695,14 @@ app.patch('/participate/startstop',function (req, res){
                 console.log(result);
                 res.status(200).send();
             });
-          }else{
+          } else {
               res.status(400).send();
           }
-        }else{
+        } else {
           if (status == 1) {
             con.query({
-                sql: 'UPDATE `participation` SET `enddate`=now() WHERE `idev` = ? AND `idu` = ?',
-                values: [idev,idu]
+                sql: 'UPDATE `participation` SET `enddate` = ? WHERE `idev` = ? AND `idu` = ?',
+                values: [enddate, idev, idu]
             }, function (err, result, fields) {
                 if (err) {
                     res.status(500).send({error: "Internal Server Error"});
@@ -660,12 +710,13 @@ app.patch('/participate/startstop',function (req, res){
                 console.log(result);
                 res.status(200).send();
             });
-          }else{
+          } else {
               res.status(400).send();
           }
         }
     });
-});
+}); // indiquer les dates de participation de l'utilisateur
+
 // MEDIA ROUTES
 
 app.get('/medias', function (req, res) {
