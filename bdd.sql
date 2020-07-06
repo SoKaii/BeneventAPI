@@ -21,8 +21,11 @@ CREATE TABLE user(
 	,CONSTRAINT user_PK PRIMARY KEY (idu)
 )ENGINE=InnoDB;
 
-INSERT INTO user(name,firstname,age,email,password) values("test","test","1998-03-19","test@test.fr","test");
-INSERT INTO user(name,firstname,age,email,password) values("John","Doe","1988-05-28","jd@test.fr","JohnDoe");
+INSERT INTO user(name,firstname,age,email,password) values("Gomez","Aubree","1998-03-19","aubree.gomez@example.com","celeste");
+INSERT INTO user(name,firstname,age,email,password) values("John","Doe","1992-04-08","jd@test.fr","JohnDoe");
+INSERT INTO user(name,firstname,age,email,password) values("Jacobs","Adrian","2000-05-02","adrian.jacobs@example.com","ring");
+INSERT INTO user(name,firstname,age,email,password) values("Brandie","Mason","1988-01-28","brandie.mason@example.com","sandrine");
+INSERT INTO user(name,firstname,age,email,password) values("Maurice","Barnett","1981-05-28","maurice.barnett@example.com","angus1");
 
 #------------------------------------------------------------
 # Table: category
@@ -48,7 +51,7 @@ INSERT INTO category(name) values("Sportive");
 CREATE TABLE association(
         idas     Int  Auto_increment  NOT NULL ,
         name     Varchar (50) NOT NULL UNIQUE,
-        logo     Blob ,
+        logo     Varchar (255) ,
         acronym  Varchar (50) ,
         email    Varchar (50) NOT NULL UNIQUE,
         phone    Varchar (12) ,
@@ -61,8 +64,11 @@ CREATE TABLE association(
 	,CONSTRAINT association_category_FK FOREIGN KEY (idcat) REFERENCES category(idcat)
 )ENGINE=InnoDB;
 
-INSERT INTO association(name,email,password,idcat) values("test","test@test.fr","test",1);
-INSERT INTO association(name,email,password,idcat) values("Benevolat","bene@test.fr","Benevolat",2);
+INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcat) values('Croix-Rouge', 'https://nsa40.casimages.com/img/2020/06/25/20062511235323873.jpg', 'CR', 'cr@cr.fr', '0123456789', 'https://www.croix-rouge.fr/', 'www.donner.croix-rouge.fr', 'cr', 4);
+INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcat) values('Medecin Sans Frontiere', 'https://nsa40.casimages.com/img/2020/07/06/200706065034573482.png', 'MSF', 'msf@msf.fr', '0123456789', 'https://www.msf.fr/', 'soutenir.msf.fr/b/mon-don', 'msf', 4);
+INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcat) values('Société protectrice des animaux', 'https://nsa40.casimages.com/img/2020/07/06/200706065034511321.png', 'SPA', 'spa@spa.fr', '0123456789', 'https://www.la-spa.fr/', 'soutenir.la-spa.fr/b/mon-don', 'spa', 1);
+INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcat) values('Agir pour l\'environnement', 'https://nsa40.casimages.com/img/2020/07/06/200706065034827123.png', 'APE', 'ape@ape.fr', '0123456789', 'https://www.agirpourlenvironnement.org/', 'soutenir.agirpourlenvironnement.org/b/mon-don', 'ape', 3);
+
 
 #------------------------------------------------------------
 # Table: event
@@ -84,6 +90,17 @@ CREATE TABLE event(
 	,CONSTRAINT event_association0_FK FOREIGN KEY (idas) REFERENCES association(idas)
 )ENGINE=InnoDB;
 
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Jour de la Nuit","Le Jour de la Nuit est une opération annuelle de sensibilisation à la pollution lumineuse, à la protection de la biodiversité nocturne et du ciel étoilé",'2020-06-26 20:00:00','2020-06-27 01:00:00',"Paris,",150,3,4);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Jour de Demain","Le Jour de Demain est une opération annuelle de sensibilisation à la pollution, à la protection de la biodiversité de notre futur",'2020-07-22 09:00:00','2020-07-22 23:00:00',"Paris,",250,3,4);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Des cantines bio","Avec 10 millions de personnes servies par jour, la restauration collective est un levier pour asseoir la transition écologique et l’ancrage territorial de l’alimentation",'2020-07-26 19:00:00','2020-07-26 21:00:00',"Paris,",15,3,4);
+
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Reunion Informative","Régulièrement, MSF organise des réunions d’information. Organisées autour du témoignage d’un volontaire revenant de mission, il est recommandé d'y assister avant de postuler en ligne.",'2020-06-26 20:00:00','2020-06-26 23:00:00',"Fontainebleau",150000,4,2);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Conférence","Vous êtes intéressé/e par le travail de MSF et souhaitez en savoir plus? Vous envisagez peut-être de travailler sur un projet MSF et avez des questions?",'2020-06-10 12:00:00','2020-06-11 01:30:00',"Poissy",15000,4,2);
+
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Jourée Portes Ouvertes","Le refuge vous ouvre ses portes le samedi 8 et dimanche 9 février de 10h00 à 18h00 sous le thème de l'amour.",'2020-02-14 11:00:00','2020-02-16 22:00:00',"Creteil,",150,3,4);
+
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("La Balade Engagée","La Balade Engagée est le nouveau festival dédié à l’engagement solidaire,",'2020-06-26 20:00:00','2020-06-27 01:00:00',"Lille,",500,2,1);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Festival Tous Engagés","Le Festival Tous Engagés est le 1er Grand événement sur l'innovation sociale organisé par la Croix-Rouge française.",'2020-06-22 20:00:00','2020-06-24 01:00:00',"Paris,",50000,2,1);
 
 #------------------------------------------------------------
 # Table: posts
@@ -103,20 +120,38 @@ CREATE TABLE posts(
 	,CONSTRAINT posts_event1_FK FOREIGN KEY (idev) REFERENCES event(idev)
 )ENGINE=InnoDB;
 
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour votre participation !",'2020-06-27 08:57:44',NULL,4,1);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Super",'2020-06-27 08:57:44',2,NULL,1);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Vraiment top!",'2020-06-27 08:57:44',1,NULL,1);
 
-#------------------------------------------------------------
-# Table: media
-#------------------------------------------------------------
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Pensez a venir ",'2020-06-27 08:57:44',NULL,4,2);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour votre participation !",'2020-06-27 08:57:44',NULL,4,2);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Cela manque de préparation",'2020-06-27 08:57:44',4,NULL,2);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("probleme de presentation mais agreable quand meme",'2020-06-27 08:57:44',1,NULL,2);
 
-CREATE TABLE media(
-        idme    Int  Auto_increment  NOT NULL ,
-        name    Varchar (255) NOT NULL ,
-        element Varchar (255) NOT NULL ,
-        idpo    Int NOT NULL
-	,CONSTRAINT media_PK PRIMARY KEY (idme)
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour votre participation !",'2020-06-27 08:57:44',NULL,4,3);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à vous pour cet événement riches en rencontres!",'2020-06-27 08:57:44',2,NULL,3);
 
-	,CONSTRAINT media_posts_FK FOREIGN KEY (idpo) REFERENCES posts(idpo)
-)ENGINE=InnoDB;
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Hesitez pas a préparer des questions ",'2020-06-27 08:57:44',NULL,2,4);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("En esperant avoir plus de moyens une prochaine fois pour que cela se déroule mieux",'2020-06-27 08:57:44',1,NULL,4);
+
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour votre participation !",'2020-06-27 08:57:44',NULL,2,5);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Justement ce genre d'événement est ce qu'il manque",'2020-06-27 08:57:44',5,NULL,5);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Un grand MERCI a vous!",'2020-06-27 08:57:44',4,NULL,5);
+
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour votre participation !",'2020-06-27 08:57:44',NULL,3,6);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Que dire de plus",'2020-06-27 08:57:44',3,NULL,6);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Le personnel nous accompagne vraiment bien!",'2020-06-27 08:57:44',2,NULL,6);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Whoaaaaaaa !",'2020-06-27 08:57:44',5,NULL,6);
+
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour votre participation !",'2020-06-27 08:57:44',NULL,1,7);
+
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour votre participation !",'2020-06-27 08:57:44',NULL,1,8);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Incroyable!",'2020-06-27 08:57:44',1,NULL,8);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("J'en perds mes mots !",'2020-06-27 08:57:44',2,NULL,8);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Quel Travail pour cet événement!",'2020-06-27 08:57:44',3,NULL,8);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("J'espere qu'il y aura d'autre événement du meme style!",'2020-06-27 08:57:44',4,NULL,8);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("Regardez comment ca fonctionne bien !",'2020-06-27 08:57:44',5,NULL,8);
 
 
 #------------------------------------------------------------
@@ -157,9 +192,9 @@ CREATE TABLE feedback(
         title   Varchar (50) NOT NULL ,
         content Text NOT NULL ,
         date    Datetime NOT NULL ,
-        status  Varchar (50) NOT NULL ,
+        status  Varchar (50) ,
         idtrello Varchar (50) ,
-	plateform Varchar (50),
+	       plateform Varchar (50),
         idas    Int ,
         idty    Int NOT NULL ,
         idu     Int ,
@@ -172,9 +207,16 @@ CREATE TABLE feedback(
 	,CONSTRAINT feedback_admin2_FK FOREIGN KEY (ida) REFERENCES admin(ida)
 )ENGINE=InnoDB;
 
-INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("Launch Screen Bug","black screen during 5s on launching app",sysdate(),"ANDROID","",1,1);
-INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("cannot remove my account","when i remove my account they said ok but i could again connect me",sysdate(),"FLUTTER","",1,2);
-INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("improvement of login screen","maybe that gonna be better if login button was bigger",sysdate(),"IOS","",2,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("Launch Screen Bug","black screen during 5s on launching app",'2020-05-14 ',"ANDROID","",1,1);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("cannot remove my account","when i remove my account they said ok but i could again connect me",'2020-02-11 08:14:56',"FLUTTER","",1,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("improvement of login screen","maybe that gonna be better if login button was bigger",'2020-03-11 19:54:20',"ANDROID","",2,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("Improve the design","texts are too small",'2020-01-14 15:21:21',"ANDROID","",1,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("no content","no content loading on each page",'2020-04-21 22:14:45',"FLUTTER","",1,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("position of button","for the feedback, the submit buttom is over the screen",'2020-04-22 14:22:06',"IOS","",2,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("Dark mode","set a dark mode pls",'2020-06-01 17:53:51',"IOS","",2,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("Detail asso","the detail soesn't display content",'2020-06-05 11:20:10',"FLUTTER","",1,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("Change colors","colors are not the same",'2020-07-05 09:54:12',"IOS","",2,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("Home menu","change the font",'2020-02-11 18:15:12',"ANDROID","",2,2);
 
 #------------------------------------------------------------
 # Table: followers
@@ -197,15 +239,42 @@ CREATE TABLE followers(
 CREATE TABLE participation(
         idev        Int NOT NULL ,
         idu         Int NOT NULL ,
-        participate Bool NULL ,
-        status      Bool NULL ,
-        startdate   Datetime NULL ,
-        enddate     Datetime NULL
+        participate Bool ,
+        status      Bool ,
+        startdate   Datetime ,
+        enddate     Datetime
 	,CONSTRAINT participation_PK PRIMARY KEY (idev,idu)
 
 	,CONSTRAINT participation_event_FK FOREIGN KEY (idev) REFERENCES event(idev)
 	,CONSTRAINT participation_user0_FK FOREIGN KEY (idu) REFERENCES user(idu)
 )ENGINE=InnoDB;
+
+INSERT INTO participation(idev,idu) VALUES(1,1);
+INSERT INTO participation(idev,idu) VALUES(1,2);
+
+INSERT INTO participation(idev,idu) VALUES(2,1);
+INSERT INTO participation(idev,idu) VALUES(2,4);
+
+INSERT INTO participation(idev,idu) VALUES(3,2);
+INSERT INTO participation(idev,idu) VALUES(3,1);
+
+INSERT INTO participation(idev,idu) VALUES(4,1);
+INSERT INTO participation(idev,idu) VALUES(4,3);
+INSERT INTO participation(idev,idu) VALUES(4,2);
+
+INSERT INTO participation(idev,idu) VALUES(5,5);
+INSERT INTO participation(idev,idu) VALUES(5,4);
+
+INSERT INTO participation(idev,idu) VALUES(6,3);
+INSERT INTO participation(idev,idu) VALUES(6,2);
+INSERT INTO participation(idev,idu) VALUES(6,5);
+
+INSERT INTO participation(idev,idu) VALUES(8,1);
+INSERT INTO participation(idev,idu) VALUES(8,2);
+INSERT INTO participation(idev,idu) VALUES(8,3);
+INSERT INTO participation(idev,idu) VALUES(8,4);
+INSERT INTO participation(idev,idu) VALUES(8,5);
+
 
 
 #------------------------------------------------------------
