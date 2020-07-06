@@ -326,16 +326,18 @@ app.post('/feedback', function (req, res) {
     const { content } = req.body;
     const { date } = req.body;
     const { idty } = req.body;
+    const { idu } = req.body
 
     con.query({
-        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`,  `idty`) VALUES (?,?,?,?)',
-        values: [title, content, date, idty]
+        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`,  `idty`,`plateform`,`status`,`idu`) VALUES (?,?,curdate(),?,?,\'\',?)',
+        values: [title, content, idty, plateform,idu]
     }, function (err, result, fields) {
         if (err) {
+          console.log(err);
             res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
-        res.status(200).send(result);
+        res.status(200).send();
     });
 }); // créer un feedback
 
