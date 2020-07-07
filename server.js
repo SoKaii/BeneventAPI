@@ -82,12 +82,12 @@ app.get('/users', function (req, res) {
     });
 }); // récupérer tout les users de la bdd
 
-app.get('/user/:id', function (req, res) {
-    const { id } = req.params;
+app.get('/user/:idu', function (req, res) {
+    const { idu } = req.params;
 
     con.query({
         sql: 'SELECT * FROM `user` WHERE `idu` = ?',
-        values: [id]
+        values: [idu]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -97,17 +97,17 @@ app.get('/user/:id', function (req, res) {
     });
 }); // récupérer le user d'id
 
-app.patch('/user/:id', function (req, res) {
+app.patch('/user/:idu', function (req, res) {
     const { password } = req.body;
     const { phone } = req.body;
     const { profilpicture } = req.body;
     const { address } = req.body;
     const { bio } = req.body;
-    const { id } = req.params;
+    const { idu } = req.params;
 
     con.query({
         sql: 'UPDATE `user` SET `password` = ?, `phone` = ?, `profilpicture` = ?, `address` = ?, `bio` = ? WHERE `idu` = ?',
-        values: [password, phone, profilpicture, address, bio, id]
+        values: [password, phone, profilpicture, address, bio, idu]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -117,12 +117,12 @@ app.patch('/user/:id', function (req, res) {
     });
 }); // modifier le user d'id
 
-app.delete('/user/:id', function (req, res) {
-    const { id } = req.params;
+app.delete('/user/:idu', function (req, res) {
+    const { idu } = req.params;
 
     con.query({
         sql: 'DELETE FROM `user` WHERE `idu` = ?',
-        values: [id]
+        values: [idu]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
