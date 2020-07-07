@@ -281,7 +281,7 @@ app.post('/signin/admin', async function (req, res) {
 
 app.get('/categories', function (req, res) {
     con.query({
-        sql: 'SELECT * FROM `category`'
+        sql: 'SELECT * FROM `category` ORDER BY category.name ASC'
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -478,7 +478,7 @@ app.get('/posts/asso/:idas', function (req, res) {
     const { idas } = req.params;
 
     con.query({
-        sql: 'SELECT posts.idpo,posts.message,posts.date,posts.idu,posts.idas,posts.idev FROM `posts`,event WHERE posts.idev = event.idev and event.idas = ?',
+        sql: 'SELECT posts.idpo,posts.message,posts.date,posts.idu,posts.idas,posts.idev FROM `posts`,event WHERE posts.idev = event.idev and event.idas = ? ORDER BY posts.date DESC',
         values: [idas]
     }, function (err, result, fields) {
         if (err) {
@@ -572,7 +572,7 @@ app.get('/events/:idas', function (req, res) {
     const { idas } = req.params;
 
     con.query({
-        sql: 'SELECT * FROM `event` WHERE `idas` = ?',
+        sql: 'SELECT * FROM `event` WHERE `idas` = ? ORDER BY event.dateDeb DESC',
         values: [idas]
     }, function (err, result, fields) {
         if (err) {
