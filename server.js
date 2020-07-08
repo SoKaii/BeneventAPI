@@ -97,6 +97,21 @@ app.get('/user/:idu', function (req, res) {
     });
 }); // récupérer le user d'id
 
+app.get('/userdetail/:id', function (req, res) {
+    const { id } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `user` WHERE `idu` = ?',
+        values: [id]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(JSON.stringify(result[0]));
+    });
+});
+
 app.patch('/user/:idu', function (req, res) {
     const { password } = req.body;
     const { phone } = req.body;
@@ -204,6 +219,21 @@ app.get('/association/:idas', function (req, res) {
         res.status(200).send(result);
     });
 }); // récupérer l'association d'id
+
+app.get('/associationdetail/:idas', function (req, res) {
+    const { idas } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `association` WHERE `idas` = ?',
+        values: [idas]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(JSON.stringify(result[0]));
+    });
+});
 
 app.get('/associations/category/:idcat', function (req, res) {
     const { idcat } = req.params;
