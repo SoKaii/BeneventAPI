@@ -11,21 +11,21 @@ CREATE TABLE user(
         idu           Int  Auto_increment  NOT NULL ,
         name          Varchar (50) NOT NULL ,
         firstname     Varchar (50) NOT NULL ,
-		age			Date NOT NULL ,
+		    age			      Date NOT NULL ,
         email         Varchar (100) NOT NULL UNIQUE ,
-		password      Varchar (50) NOT NULL ,
+		    password      Varchar (50) NOT NULL ,
         phone         Varchar (12) ,
         profilpicture Varchar (255) ,
         address       Text ,
-        description  Varchar (250)
+        description   Varchar (250)
 	,CONSTRAINT user_PK PRIMARY KEY (idu)
 )ENGINE=InnoDB;
 
-INSERT INTO user(name,firstname,age,email,password) values("Gomez","Aubree","1998-03-19","aubree.gomez@example.com","celeste");
-INSERT INTO user(name,firstname,age,email,password) values("John","Doe","1992-04-08","jd@test.fr","JohnDoe");
-INSERT INTO user(name,firstname,age,email,password) values("Jacobs","Adrian","2000-05-02","adrian.jacobs@example.com","ring");
-INSERT INTO user(name,firstname,age,email,password) values("Brandie","Mason","1988-01-28","brandie.mason@example.com","sandrine");
-INSERT INTO user(name,firstname,age,email,password) values("Maurice","Barnett","1981-05-28","maurice.barnett@example.com","angus1");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Gomez","Aubree","1998-03-19","aubree.gomez@example.com","celeste","https://randomuser.me/api/portraits/women/23.jpg","0655443322");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("John","Doe","1992-04-08","jd@test.fr","JohnDoe","https://randomuser.me/api/portraits/men/79.jpg","+33612141512");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Jacobs","Adrian","2000-05-02","adrian.jacobs@example.com","ring","https://randomuser.me/api/portraits/lego/6.jpg","+33612345678");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Brandie","Mason","1988-01-28","brandie.mason@example.com","sandrine","https://randomuser.me/api/portraits/women/3.jpg","0678901234");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Maurice","Barnett","1981-05-28","maurice.barnett@example.com","angus1","https://randomuser.me/api/portraits/men/3.jpg","0611223344");
 
 #------------------------------------------------------------
 # Table: category
@@ -97,7 +97,7 @@ INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,id
 INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Reunion Informative","Régulièrement, MSF organise des réunions d’information. Organisées autour du témoignage d’un volontaire revenant de mission, il est recommandé d'y assister avant de postuler en ligne.",'2020-06-26 20:00:00','2020-06-26 23:00:00',"Fontainebleau",150000,4,2);
 INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Conférence","Vous êtes intéressé/e par le travail de MSF et souhaitez en savoir plus? Vous envisagez peut-être de travailler sur un projet MSF et avez des questions?",'2020-06-10 12:00:00','2020-06-11 01:30:00',"Poissy",15000,4,2);
 
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Jourée Portes Ouvertes","Le refuge vous ouvre ses portes le samedi 8 et dimanche 9 février de 10h00 à 18h00 sous le thème de l'amour.",'2020-02-14 11:00:00','2020-02-16 22:00:00',"Creteil,",150,3,4);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Journée Portes Ouvertes","Le refuge vous ouvre ses portes le samedi 8 et dimanche 9 février de 10h00 à 18h00 sous le thème de l'amour.",'2020-02-14 11:00:00','2020-02-16 22:00:00',"Creteil,",150,3,4);
 
 INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("La Balade Engagée","La Balade Engagée est le nouveau festival dédié à l’engagement solidaire,",'2020-06-26 20:00:00','2020-06-27 01:00:00',"Lille,",500,2,1);
 INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Festival Tous Engagés","Le Festival Tous Engagés est le 1er Grand événement sur l'innovation sociale organisé par la Croix-Rouge française.",'2020-06-22 20:00:00','2020-06-24 01:00:00',"Paris,",50000,2,1);
@@ -165,7 +165,7 @@ CREATE TABLE type(
 )ENGINE=InnoDB;
 
 INSERT INTO type(name) values("bug");
-INSERT INTO type(name) values("improvement");
+INSERT INTO type(name) values("note");
 
 #------------------------------------------------------------
 # Table: admin
@@ -188,17 +188,18 @@ INSERT INTO admin(login,password,email) values("admin_03","thomas","t.martin9250
 #------------------------------------------------------------
 
 CREATE TABLE feedback(
-        idfe    Int  Auto_increment  NOT NULL ,
-        title   Varchar (50) NOT NULL ,
-        content Text NOT NULL ,
-        date    Datetime NOT NULL ,
-        status  Varchar (50) ,
-        idtrello Varchar (50) ,
-	       plateform Varchar (50),
-        idas    Int ,
-        idty    Int NOT NULL ,
-        idu     Int ,
-        ida     Int
+        idfe        Int  Auto_increment  NOT NULL ,
+        title       Varchar (50) ,
+        content     Text NOT NULL ,
+        date        Datetime NOT NULL ,
+        status      Varchar (50) ,
+        idtrello    Varchar (50) ,
+	      plateform   Varchar (50),
+        note        Int,
+        idas        Int ,
+        idty        Int NOT NULL ,
+        idu         Int ,
+        ida         Int
 	,CONSTRAINT feedback_PK PRIMARY KEY (idfe)
 
 	,CONSTRAINT feedback_association_FK FOREIGN KEY (idas) REFERENCES association(idas)
@@ -209,14 +210,14 @@ CREATE TABLE feedback(
 
 INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("Launch Screen Bug","black screen during 5s on launching app",'2020-05-14 ',"ANDROID","",1,1);
 INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("cannot remove my account","when i remove my account they said ok but i could again connect me",'2020-02-11 08:14:56',"FLUTTER","",1,2);
-INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("improvement of login screen","maybe that gonna be better if login button was bigger",'2020-03-11 19:54:20',"ANDROID","",2,2);
+INSERT INTO feedback(content,date,plateform,status,note,idty,idu) values("maybe that gonna be better if login button was bigger",'2020-03-11 19:54:20',"ANDROID","",4,2,2);
 INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("Improve the design","texts are too small",'2020-01-14 15:21:21',"ANDROID","",1,2);
 INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("no content","no content loading on each page",'2020-04-21 22:14:45',"FLUTTER","",1,2);
-INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("position of button","for the feedback, the submit buttom is over the screen",'2020-04-22 14:22:06',"IOS","",2,2);
-INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("Dark mode","set a dark mode pls",'2020-06-01 17:53:51',"IOS","",2,2);
+INSERT INTO feedback(content,date,plateform,status,note,idty,idu) values("for the feedback, the submit buttom is over the screen",'2020-04-22 14:22:06',"IOS","",5,2,2);
+INSERT INTO feedback(content,date,plateform,status,note,idty,idu) values("set a dark mode pls",'2020-06-01 17:53:51',"IOS","",4,2,3);
 INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("Detail asso","the detail soesn't display content",'2020-06-05 11:20:10',"FLUTTER","",1,2);
-INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("Change colors","colors are not the same",'2020-07-05 09:54:12',"IOS","",2,2);
-INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("Home menu","change the font",'2020-02-11 18:15:12',"ANDROID","",2,2);
+INSERT INTO feedback(content,date,plateform,status,note,idty,idu) values("colors are not the same",'2020-07-05 09:54:12',"IOS","",5,2,2);
+INSERT INTO feedback(content,date,plateform,status,note,idty,idu) values("change the font",'2020-02-11 18:15:12',"ANDROID","",3,2,1);
 
 #------------------------------------------------------------
 # Table: followers

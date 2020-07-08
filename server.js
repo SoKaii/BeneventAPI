@@ -97,6 +97,21 @@ app.get('/user/:id', function (req, res) {
     });
 }); // récupérer le user d'id
 
+app.get('/userdetail/:id', function (req, res) {
+    const { id } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `user` WHERE `idu` = ?',
+        values: [id]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(JSON.stringify(result[0]));
+    });
+});
+
 app.patch('/user/:id', function (req, res) {
     const { password } = req.body;
     const { phone } = req.body;
@@ -202,6 +217,21 @@ app.get('/association/:idas', function (req, res) {
         }
         console.log(result);
         res.status(200).send(result);
+    });
+});
+
+app.get('/associationdetail/:idas', function (req, res) {
+    const { idas } = req.params;
+
+    con.query({
+        sql: 'SELECT * FROM `association` WHERE `idas` = ?',
+        values: [idas]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(JSON.stringify(result[0]));
     });
 }); // récupérer l'association d'id
 
@@ -310,7 +340,7 @@ app.get('/feedback/:idty', function (req, res) {
     const { idty } = req.params;
 
     con.query({
-        sql: 'SELECT * FROM `feedback` WHERE `idty` = ?',
+        sql: 'SELECT * FROM `feedback` WHERE `idty` = ? ORDER BY `date` DESC',
         values: [idty]
     }, function (err, result, fields) {
         if (err) {
