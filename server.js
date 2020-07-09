@@ -751,6 +751,21 @@ app.patch('/participate/status',function (req, res) {
     });
 }); // indiquer les dates de participation de l'utilisateur
 
+app.get('/participants/:idev', function (req, res) {
+    const { idev } = req.params;
+
+    con.query({
+        sql: 'SELECT user.idu, user.name, user.firstname, user.profilpicture FROM participation, user WHERE participation.idu = user.idu AND participation.idev = ? AND participation.status = 1 ORDER BY user.name',
+        values: [idev]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
 // MEDIA ROUTES
 
 app.get('/medias', function (req, res) {
