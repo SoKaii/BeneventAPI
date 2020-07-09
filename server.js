@@ -10,6 +10,7 @@ const con = mysql.createConnection({
     user: config.user, //user mysql
     password: config.password, //password mysql
     database: config.database, //database mysql
+    //socketPath: config.socketPath
 });
 
 app.use(express.json());
@@ -44,7 +45,7 @@ app.post('/signup/user', async function (req, res) {
             }
         } else {
             console.log(result);
-            res.status(201).send(result);
+            res.status(201).send();
         }
     });
 }); // créer un nouveau user dans la bdd
@@ -193,7 +194,7 @@ app.post('/signin/association', async function (req, res) {
     });
 }); // permet aux associations de se connecter
 
-app.get('/associations', function (res, res) {
+app.get('/associations', function (req, res) {
     con.query({
         sql: 'SELECT * FROM `association`'
     }, function (err, result, fields) {
@@ -218,24 +219,9 @@ app.get('/association/:idas', function (req, res) {
         console.log(result);
         res.status(200).send(result);
     });
-});
-
-app.get('/associationdetail/:idas', function (req, res) {
-    const { idas } = req.params;
-
-    con.query({
-        sql: 'SELECT * FROM `association` WHERE `idas` = ?',
-        values: [idas]
-    }, function (err, result, fields) {
-        if (err) {
-            res.status(500).send({error: "Internal Server Error"});
-        }
-        console.log(result);
-        res.status(200).send(JSON.stringify(result[0]));
-    });
 }); // récupérer l'association d'id
 
-app.get('/associationdetail/:idas', function (req, res) {
+app.get('/association/details/:idas', function (req, res) {
     const { idas } = req.params;
 
     con.query({
@@ -248,7 +234,7 @@ app.get('/associationdetail/:idas', function (req, res) {
         console.log(result);
         res.status(200).send(JSON.stringify(result[0]));
     });
-});
+}); // récupérer l'association sous json d'id
 
 app.get('/associations/category/:idcat', function (req, res) {
     const { idcat } = req.params;
@@ -589,7 +575,7 @@ app.post('/post/user', function (req, res) {
 
 app.get('/events', function (req, res) {
     con.query({
-        sql: 'SELECT * FROM `event`'
+        sql: 'SELECT * FROM `event` ORDER BY event.dateDeb DESC'
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -652,6 +638,7 @@ app.post('/event', function (req, res) {
 
 app.patch('/event/:idev', function (req, res) {
     const { idev } = req.params;
+    const { name } = req.body;
     const { description } = req.body;
     const { dateDeb } = req.body;
     const { dateFin } = req.body;
@@ -659,8 +646,8 @@ app.patch('/event/:idev', function (req, res) {
     const { maxBenevole } = req.body;
 
     con.query({
-        sql: 'UPDATE `event` SET `description` = ?, `dateDeb` = ?, `dateFin` = ?, `location` = ?, `maxBenevole` = ? WHERE `idev` = ?',
-        values: [description, dateDeb, dateFin, location, maxBenevole, idev]
+        sql: 'UPDATE `event` SET `name` = ?, `description` = ?, `dateDeb` = ?, `dateFin` = ?, `location` = ?, `maxBenevole` = ? WHERE `idev` = ?',
+        values: [name, description, dateDeb, dateFin, location, maxBenevole, idev]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
