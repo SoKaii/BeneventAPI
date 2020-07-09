@@ -10,7 +10,7 @@ const con = mysql.createConnection({
     user: config.user, //user mysql
     password: config.password, //password mysql
     database: config.database, //database mysql
-    //socketPath: config.socketPath
+    socketPath: config.socketPath
 });
 
 app.use(express.json());
@@ -323,6 +323,8 @@ app.get('/categories', function (req, res) {
 }); // récupérer toutes les categories
 
 app.get('/category/:idcat', function (req, res) {
+    const { idcat } = req.params;
+
     con.query({
         sql: 'SELECT * FROM `category` WHERE `idcat` = ?',
         values: [idcat]
