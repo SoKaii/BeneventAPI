@@ -373,11 +373,12 @@ app.post('/feedback', function (req, res) {
     const { status } = req.body;
     const { plateform } = req.body;
     const { idty } = req.body;
-    const { idu } = req.body
+    const { idu } = req.body;
+    const { note } = req.body;
 
     con.query({
-        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `idty`, `plateform`, `status`, `idu`) VALUES (?,?,?,?,?,?,?)',
-        values: [title, content, date, idty, plateform, status, idu]
+        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `idty`, `plateform`, `status`, `idu`,`note`) VALUES (?,?,?,?,?,?,?,?)',
+        values: [title, content, date, idty, plateform, status, idu, note]
     }, function (err, result, fields) {
         if (err) {
           console.log(err);
