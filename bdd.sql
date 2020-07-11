@@ -258,31 +258,31 @@ CREATE TABLE participation(
 	,CONSTRAINT participation_user0_FK FOREIGN KEY (idu) REFERENCES user(idu)
 )ENGINE=InnoDB;
 
-INSERT INTO participation(idev,idu) VALUES(1,1);
-INSERT INTO participation(idev,idu) VALUES(1,2);
+INSERT INTO participation(idev,idu,status) VALUES(1,1,1);
+INSERT INTO participation(idev,idu,status) VALUES(1,2,1);
 
-INSERT INTO participation(idev,idu) VALUES(2,1);
-INSERT INTO participation(idev,idu) VALUES(2,4);
+INSERT INTO participation(idev,idu,status) VALUES(2,1,1);
+INSERT INTO participation(idev,idu,status) VALUES(2,4,1);
 
-INSERT INTO participation(idev,idu) VALUES(3,2);
-INSERT INTO participation(idev,idu) VALUES(3,1);
+INSERT INTO participation(idev,idu,status) VALUES(3,2,1);
+INSERT INTO participation(idev,idu,status) VALUES(3,1,1);
 
-INSERT INTO participation(idev,idu) VALUES(4,1);
-INSERT INTO participation(idev,idu) VALUES(4,3);
-INSERT INTO participation(idev,idu) VALUES(4,2);
+INSERT INTO participation(idev,idu,status) VALUES(4,1,1);
+INSERT INTO participation(idev,idu,status) VALUES(4,3,1);
+INSERT INTO participation(idev,idu,status) VALUES(4,2,1);
 
-INSERT INTO participation(idev,idu) VALUES(5,5);
-INSERT INTO participation(idev,idu) VALUES(5,4);
+INSERT INTO participation(idev,idu,status) VALUES(5,5,1);
+INSERT INTO participation(idev,idu,status) VALUES(5,4,1);
 
-INSERT INTO participation(idev,idu) VALUES(6,3);
-INSERT INTO participation(idev,idu) VALUES(6,2);
-INSERT INTO participation(idev,idu) VALUES(6,5);
+INSERT INTO participation(idev,idu,status) VALUES(6,3,1);
+INSERT INTO participation(idev,idu,status) VALUES(6,2,1);
+INSERT INTO participation(idev,idu,status) VALUES(6,5,1);
 
-INSERT INTO participation(idev,idu) VALUES(8,1);
-INSERT INTO participation(idev,idu) VALUES(8,2);
-INSERT INTO participation(idev,idu) VALUES(8,3);
-INSERT INTO participation(idev,idu) VALUES(8,4);
-INSERT INTO participation(idev,idu) VALUES(8,5);
+INSERT INTO participation(idev,idu,status) VALUES(8,1,1);
+INSERT INTO participation(idev,idu,status) VALUES(8,2,1);
+INSERT INTO participation(idev,idu,status) VALUES(8,3,1);
+INSERT INTO participation(idev,idu,status) VALUES(8,4,1);
+INSERT INTO participation(idev,idu,status) VALUES(8,5,1);
 
 
 

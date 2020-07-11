@@ -506,7 +506,7 @@ app.post('/trello/feedback', async function (req, res) {
 
 // FEED ROUTES
 
-app.get('/posts', function (req, res) {
+app.get('/posts/:idu', function (req, res) {
     con.query({
         sql: 'SELECT * FROM `posts`'
     }, function (err, result, fields) {
@@ -638,7 +638,7 @@ app.post('/event', function (req, res) {
     const { idas } = req.body;
 
     con.query({
-        sql: 'INSERT INTO `event` (`name`, `description`, `dateDeb`, `dateFin`, `location`, `maxBenevole`, `idcat`, `idas`) VALUES (?,?,?,?,?,?,?,?)',
+        sql: 'INSERT INTO `event` (`name`, `description`, `dateDeb`, `dateFin`, `location`, `maxBenevole`, `idcat`, `idas`,`fakeevent`) VALUES (?,?,?,?,?,?,?,?,false)',
         values: [name, description, dateDeb, dateFin, location, maxBenevole, idcat, idas]
     }, function (err, result, fields) {
         if (err) {
@@ -669,6 +669,39 @@ app.patch('/event/:idev', function (req, res) {
         res.status(200).send(result);
     });
 }); // modifier un event d'id
+
+//FOLLOW ROUTES
+app.post('/follow',function (req, res) {
+    const { idas } = req.body;
+    const { idu } = req.body;
+
+    con.query({
+        sql: 'INSERT INTO `followers` (`idas`,`idu`) VALUES(?,?)',
+        values: [idas, idu]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: err});
+        }
+        console.log(result);
+        res.status(200).send();
+    });
+});
+
+app.delete('/unfollow',function (req, res) {
+    const { idas } = req.body;
+    const { idu } = req.body;
+
+    con.query({
+        sql: 'DELETE FROM `followers` WHERE `idas`=? AND `idu`=?)',
+        values: [idas, idu]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: err});
+        }
+        console.log(result);
+        res.status(200).send();
+    });
+});
 
 // PARTICIPATION ROUTES
 
