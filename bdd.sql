@@ -43,6 +43,8 @@ INSERT INTO category(name) values("Environnementale");
 INSERT INTO category(name) values("Humanitaire");
 INSERT INTO category(name) values("Musicale");
 INSERT INTO category(name) values("Sportive");
+INSERT INTO category(name) values("Autre");
+
 
 #------------------------------------------------------------
 # Table: association
@@ -83,7 +85,8 @@ CREATE TABLE event(
         location    Varchar (255) NOT NULL ,
         maxBenevole Int NOT NULL ,
         idcat       Int NOT NULL ,
-        idas        Int NOT NULL
+        idas        Int NOT NULL ,
+        fakeevent   Bool
 	,CONSTRAINT event_PK PRIMARY KEY (idev)
 
 	,CONSTRAINT event_category_FK FOREIGN KEY (idcat) REFERENCES category(idcat)
@@ -101,6 +104,11 @@ INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,id
 
 INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("La Balade Engagée","La Balade Engagée est le nouveau festival dédié à l’engagement solidaire,",'2020-06-26 20:00:00','2020-06-27 01:00:00',"Lille,",500,2,1);
 INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Festival Tous Engagés","Le Festival Tous Engagés est le 1er Grand événement sur l'innovation sociale organisé par la Croix-Rouge française.",'2020-06-22 20:00:00','2020-06-24 01:00:00',"Paris,",50000,2,1);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,1);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,2);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,3);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,4);
+
 
 #------------------------------------------------------------
 # Table: posts
@@ -148,9 +156,9 @@ INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour vo
 
 INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour votre participation !",'2020-06-27 08:57:44',NULL,1,8);
 INSERT INTO posts (message, date, idu, idas, idev) VALUES("Incroyable!",'2020-06-27 08:57:44',1,NULL,8);
-INSERT INTO posts (message, date, idu, idas, idev) VALUES("J'en perds mes mots !",'2020-06-27 08:57:44',2,NULL,8);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("J\'en perds mes mots !",'2020-06-27 08:57:44',2,NULL,8);
 INSERT INTO posts (message, date, idu, idas, idev) VALUES("Quel Travail pour cet événement!",'2020-06-27 08:57:44',3,NULL,8);
-INSERT INTO posts (message, date, idu, idas, idev) VALUES("J'espere qu'il y aura d'autre événement du meme style!",'2020-06-27 08:57:44',4,NULL,8);
+INSERT INTO posts (message, date, idu, idas, idev) VALUES("J\'espere qu'il y aura d'autre événement du meme style!",'2020-06-27 08:57:44',4,NULL,8);
 INSERT INTO posts (message, date, idu, idas, idev) VALUES("Regardez comment ca fonctionne bien !",'2020-06-27 08:57:44',5,NULL,8);
 
 
@@ -215,7 +223,7 @@ INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("Impr
 INSERT INTO feedback(title,content,date,plateform,status,idty,idu) values("no content","no content loading on each page",'2020-04-21 22:14:45',"FLUTTER","",1,2);
 INSERT INTO feedback(content,date,plateform,status,note,idty,idu) values("for the feedback, the submit buttom is over the screen",'2020-04-22 14:22:06',"IOS","",5,2,2);
 INSERT INTO feedback(content,date,plateform,status,note,idty,idu) values("set a dark mode pls",'2020-06-01 17:53:51',"IOS","",4,2,3);
-INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("Detail asso","the detail soesn't display content",'2020-06-05 11:20:10',"FLUTTER","",1,2);
+INSERT INTO feedback(title,content,date,plateform,status,idty,idas) values("Detail asso","the detail doesn\'t display content",'2020-06-05 11:20:10',"FLUTTER","",1,2);
 INSERT INTO feedback(content,date,plateform,status,note,idty,idu) values("colors are not the same",'2020-07-05 09:54:12',"IOS","",5,2,2);
 INSERT INTO feedback(content,date,plateform,status,note,idty,idu) values("change the font",'2020-02-11 18:15:12',"ANDROID","",3,2,1);
 
