@@ -507,8 +507,10 @@ app.post('/trello/feedback', async function (req, res) {
 // FEED ROUTES
 
 app.get('/posts/:idu', function (req, res) {
+  const { idu } = req.params;
     con.query({
-        sql: 'SELECT * FROM `posts`'
+        sql: 'SELECT posts.*,event.name as eventname,association.name as assoname FROM `user`,`association`,`event`,`followers`,`posts` WHERE user.idu= followers.idu and followers.idas=association.idas and association.idas = event.idas and event.idev = posts.idev and user.idu = ?',
+        values: [idu]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
