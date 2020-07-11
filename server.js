@@ -586,9 +586,11 @@ app.post('/post/user', function (req, res) {
 
 // EVENT ROUTES
 
-app.get('/events', function (req, res) {
+app.get('/events/:idu', function (req, res) {
+  const { idu } =req.params;
     con.query({
-        sql: 'SELECT * FROM `event` ORDER BY event.dateDeb DESC'
+        sql: 'select event.* from user,association,event,followers where user.idu= followers.idu and followers.idas=association.idas and association.idas = event.idas and user.idu = ? ORDER BY event.dateDeb DESC',
+        values: [idu]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -687,12 +689,31 @@ app.post('/follow',function (req, res) {
     });
 });
 
+app.get('/follow/:idas/:idu',function (req, res) {
+    const { idas } = req.params;
+    const { idu } = req.params;
+
+    console.log(idas);
+    console.log(idu);
+
+    con.query({
+        sql: 'SELECT * FROM `followers` WHERE`idas`=? and `idu`=?',
+        values: [idas, idu]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: err});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
 app.delete('/unfollow',function (req, res) {
     const { idas } = req.body;
     const { idu } = req.body;
 
     con.query({
-        sql: 'DELETE FROM `followers` WHERE `idas`=? AND `idu`=?)',
+        sql: 'DELETE FROM `followers` WHERE `idas`=? AND `idu`=?',
         values: [idas, idu]
     }, function (err, result, fields) {
         if (err) {
