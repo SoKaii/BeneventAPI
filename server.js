@@ -727,6 +727,24 @@ app.delete('/unfollow',function (req, res) {
 });
 
 // PARTICIPATION ROUTES
+app.get('/participate/:idas/:idu',function (req, res) {
+    const { idev } = req.params;
+    const { idu } = req.params;
+
+    console.log(idev);
+    console.log(idu);
+
+    con.query({
+        sql: 'SELECT * FROM `participation` WHERE`idev`=? and `idu`=?',
+        values: [idev, idu]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: err});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
 
 app.post('/participate',function (req, res) {
     const { idev } = req.body;
