@@ -167,8 +167,18 @@ app.post('/signup/association', async function (req, res) {
                 res.status(400).send(err);
             }
         } else {
-            console.log(result);
-            res.status(201).send(result);
+          const idev = result[0].idev;
+          await con.query({
+              sql: 'INSERT INTO event(`name`,`description`,`dateDeb`,`dateFin`,`location`,`maxBenevole`,`idcat`,`idas`,`fakeevent`) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,?,true)',
+              values: [idev]
+          }, function (err, result, fields) {
+              if (err) {
+                  res.status(400).send(err);
+              } else {
+                  console.log(result);
+                  res.status(201).send(result);
+              }
+          });
         }
     });
 }); // créer une nouvelle association
