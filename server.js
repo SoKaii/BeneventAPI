@@ -588,7 +588,7 @@ app.post('/post/user', function (req, res) {
 
 // EVENT ROUTES
 
-app.get('/events/:idu', function (req, res) {
+app.get('/events/user/:idu', function (req, res) {
   const { idu } =req.params;
     con.query({
         sql: 'select event.* from user,association,event,followers where user.idu= followers.idu and followers.idas=association.idas and association.idas = event.idas and user.idu = ? ORDER BY event.dateDeb DESC',
@@ -616,7 +616,7 @@ app.get('/event/:idev', function (req, res) {
     });
 }); // récupérer un évènement d'id
 
-app.get('/events/:idas', function (req, res) {
+app.get('/events/association/:idas', function (req, res) {
     const { idas } = req.params;
 
     con.query({
