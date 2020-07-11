@@ -93,21 +93,21 @@ CREATE TABLE event(
 	,CONSTRAINT event_association0_FK FOREIGN KEY (idas) REFERENCES association(idas)
 )ENGINE=InnoDB;
 
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Jour de la Nuit","Le Jour de la Nuit est une opération annuelle de sensibilisation à la pollution lumineuse, à la protection de la biodiversité nocturne et du ciel étoilé",'2020-06-26 20:00:00','2020-06-27 01:00:00',"Paris,",150,3,4);
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Jour de Demain","Le Jour de Demain est une opération annuelle de sensibilisation à la pollution, à la protection de la biodiversité de notre futur",'2020-07-22 09:00:00','2020-07-22 23:00:00',"Paris,",250,3,4);
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Des cantines bio","Avec 10 millions de personnes servies par jour, la restauration collective est un levier pour asseoir la transition écologique et l’ancrage territorial de l’alimentation",'2020-07-26 19:00:00','2020-07-26 21:00:00',"Paris,",15,3,4);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("Jour de la Nuit","Le Jour de la Nuit est une opération annuelle de sensibilisation à la pollution lumineuse, à la protection de la biodiversité nocturne et du ciel étoilé",'2020-06-26 20:00:00','2020-06-27 01:00:00',"Paris,",150,3,4,false);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("Jour de Demain","Le Jour de Demain est une opération annuelle de sensibilisation à la pollution, à la protection de la biodiversité de notre futur",'2020-07-22 09:00:00','2020-07-22 23:00:00',"Paris,",250,3,4,false);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("Des cantines bio","Avec 10 millions de personnes servies par jour, la restauration collective est un levier pour asseoir la transition écologique et l’ancrage territorial de l’alimentation",'2020-07-26 19:00:00','2020-07-26 21:00:00',"Paris,",15,3,4,false);
 
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Reunion Informative","Régulièrement, MSF organise des réunions d’information. Organisées autour du témoignage d’un volontaire revenant de mission, il est recommandé d'y assister avant de postuler en ligne.",'2020-06-26 20:00:00','2020-06-26 23:00:00',"Fontainebleau",150000,4,2);
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Conférence","Vous êtes intéressé/e par le travail de MSF et souhaitez en savoir plus? Vous envisagez peut-être de travailler sur un projet MSF et avez des questions?",'2020-06-10 12:00:00','2020-06-11 01:30:00',"Poissy",15000,4,2);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("Reunion Informative","Régulièrement, MSF organise des réunions d’information. Organisées autour du témoignage d’un volontaire revenant de mission, il est recommandé d'y assister avant de postuler en ligne.",'2020-06-26 20:00:00','2020-06-26 23:00:00',"Fontainebleau",150000,4,2,false);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("Conférence","Vous êtes intéressé/e par le travail de MSF et souhaitez en savoir plus? Vous envisagez peut-être de travailler sur un projet MSF et avez des questions?",'2020-06-10 12:00:00','2020-06-11 01:30:00',"Poissy",15000,4,2,false);
 
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Journée Portes Ouvertes","Le refuge vous ouvre ses portes le samedi 8 et dimanche 9 février de 10h00 à 18h00 sous le thème de l'amour.",'2020-02-14 11:00:00','2020-02-16 22:00:00',"Creteil,",150,3,4);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("Journée Portes Ouvertes","Le refuge vous ouvre ses portes le samedi 8 et dimanche 9 février de 10h00 à 18h00 sous le thème de l'amour.",'2020-02-14 11:00:00','2020-02-16 22:00:00',"Creteil,",150,3,4,false);
 
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("La Balade Engagée","La Balade Engagée est le nouveau festival dédié à l’engagement solidaire,",'2020-06-26 20:00:00','2020-06-27 01:00:00',"Lille,",500,2,1);
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("Festival Tous Engagés","Le Festival Tous Engagés est le 1er Grand événement sur l'innovation sociale organisé par la Croix-Rouge française.",'2020-06-22 20:00:00','2020-06-24 01:00:00',"Paris,",50000,2,1);
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,1);
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,2);
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,3);
-INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,4);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("La Balade Engagée","La Balade Engagée est le nouveau festival dédié à l’engagement solidaire,",'2020-06-26 20:00:00','2020-06-27 01:00:00',"Lille,",500,2,1,false);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("Festival Tous Engagés","Le Festival Tous Engagés est le 1er Grand événement sur l'innovation sociale organisé par la Croix-Rouge française.",'2020-06-22 20:00:00','2020-06-24 01:00:00',"Paris,",50000,2,1,false);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,1,true);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,2,true);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,3,true);
+INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("","",'2000-01-01 00:00:00','2000-01-01 00:00:00',"",0,7,4,true);
 
 
 #------------------------------------------------------------
