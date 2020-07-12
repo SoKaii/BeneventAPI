@@ -626,7 +626,7 @@ app.post('/post/user', function (req, res) {
     const { idev } = req.body;
 
     con.query({
-        sql: 'INSERT INTO `post` (`message`, `date`, `idu`, `idev`) VALUES (?,?,?,?)',
+        sql: 'INSERT INTO `posts` (`message`, `date`, `idu`, `idev`) VALUES (?,?,?,?)',
         values: [message, date, idu, idev]
     }, function (err, result, fields) {
         if (err) {
@@ -636,6 +636,20 @@ app.post('/post/user', function (req, res) {
         res.status(200).send(result);
     });
 }); // créer des posts depuis un compte user
+
+app.delete('/post/:idpo', function (req, res) {
+    const { idpo } = req.params;
+
+    con.query({
+        sql: 'DELETE FROM `posts` WHERE `idpo` = ?',
+        values: [idpo]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        res.status(204).send();
+    });
+});
 
 // EVENT ROUTES
 
