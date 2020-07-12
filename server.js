@@ -73,7 +73,7 @@ app.post('/signin/user', async function (req, res) {
 
 app.get('/users', function (req, res) {
     con.query({
-        sql: 'SELECT * FROM `user`'
+        sql: 'SELECT idu,name,firstname,age,profilpicture FROM `user`'
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -87,7 +87,7 @@ app.get('/user/:idu', function (req, res) {
     const { idu } = req.params;
 
     con.query({
-        sql: 'SELECT * FROM `user` WHERE `idu` = ?',
+        sql: 'SELECT idu,name,firstname,age,profilpicture,phone FROM `user` WHERE `idu` = ?',
         values: [idu]
     }, function (err, result, fields) {
         if (err) {
