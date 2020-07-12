@@ -375,8 +375,8 @@ app.post('/feedback/bug', function (req, res) {
 
     if(idas == null){
       con.query({
-          sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `idty`, `plateform`, `idu`) VALUES (?,?,?,?,?,?,?)',
-          values: [title, content, date, idty, plateform, idu, note]
+          sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `idty`, `plateform`, `idu`) VALUES (?,?,?,?,?,?)',
+          values: [title, content, date, idty, plateform, idu]
       }, function (err, result, fields) {
           if (err) {
             console.log(err);
@@ -425,7 +425,7 @@ app.post('/feedback/evaluation', function (req, res) {
       }
       if(idu == null){
         con.query({
-          sql: 'INSERT INTO `feedback` (`content`, `date`, `idty`, `plateform`, `idas`,`note`) VALUES (?,?,?,?,?,?,?)',
+          sql: 'INSERT INTO `feedback` (`content`, `date`, `idty`, `plateform`, `idas`,`note`) VALUES (?,?,?,?,?,?)',
           values: [content, date, idty, plateform, idas, note]
         }, function (err, result, fields) {
           if (err) {
