@@ -727,7 +727,7 @@ app.delete('/unfollow',function (req, res) {
 });
 
 // PARTICIPATION ROUTES
-app.get('/participate/:idas/:idu',function (req, res) {
+app.get('/participate/:idev/:idu',function (req, res) {
     const { idev } = req.params;
     const { idu } = req.params;
 
@@ -770,7 +770,7 @@ app.patch('/participate/refuse',function (req, res) {
     const { idev } = req.body;
     const { idu } = req.body;
 
-    if (status == 1) {
+    if (status == 0) {
         con.query({
             sql: 'UPDATE `participation` SET `status` = ?,`participate` = ? WHERE `idev` = ? AND `idu` = ?',
             values: [status, participate, idev, idu]
