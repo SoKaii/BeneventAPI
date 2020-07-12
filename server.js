@@ -364,27 +364,78 @@ app.get('/feedback/:idty', function (req, res) {
     });
 }); // récupérer tout les feedback d'un type
 
-app.post('/feedback', function (req, res) {
+app.post('/feedback/bug', function (req, res) {
     const { title } = req.body;
     const { content } = req.body;
     const { date } = req.body;
-    const { status } = req.body;
     const { plateform } = req.body;
     const { idty } = req.body;
     const { idu } = req.body;
+    const { idas } = req.body;
+
+    if(idas == null){
+      con.query({
+          sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `idty`, `plateform`, `idu`) VALUES (?,?,?,?,?,?,?)',
+          values: [title, content, date, idty, plateform, idu, note]
+      }, function (err, result, fields) {
+          if (err) {
+            console.log(err);
+              res.status(500).send({error: "Internal Server Error"});
+          }
+          console.log(result);
+          res.status(200).send();
+      });
+    }
+    if(idu == null){
+      con.query({
+          sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `idty`, `plateform`, `idas`) VALUES (?,?,?,?,?,?,?)',
+          values: [title, content, date, idty, plateform, idas, note]
+      }, function (err, result, fields) {
+          if (err) {
+            console.log(err);
+              res.status(500).send({error: "Internal Server Error"});
+          }
+          console.log(result);
+          res.status(200).send();
+      });
+    }
+});
+
+app.post('/feedback/evaluation', function (req, res) {
+    const { content } = req.body;
+    const { date } = req.body;
+    const { plateform } = req.body;
+    const { idty } = req.body;
+    const { idu } = req.body;
+    const { idas } = req.body;
     const { note } = req.body;
 
-    con.query({
-        sql: 'INSERT INTO `feedback` (`title`, `content`, `date`, `idty`, `plateform`, `status`, `idu`,`note`) VALUES (?,?,?,?,?,?,?,?)',
-        values: [title, content, date, idty, plateform, status, idu, note]
-    }, function (err, result, fields) {
+    if(idas == null){
+      con.query({
+        sql: 'INSERT INTO `feedback` (`content`, `date`, `idty`, `plateform`, `idu`,`note`) VALUES (?,?,?,?,?,?,?)',
+        values: [content, date, idty, plateform, idu, note]
+      }, function (err, result, fields) {
         if (err) {
           console.log(err);
             res.status(500).send({error: "Internal Server Error"});
-        }
-        console.log(result);
-        res.status(200).send();
-    });
+          }
+          console.log(result);
+          res.status(200).send();
+        });
+      }
+      if(idu == null){
+        con.query({
+          sql: 'INSERT INTO `feedback` (`content`, `date`, `idty`, `plateform`, `idas`,`note`) VALUES (?,?,?,?,?,?,?)',
+          values: [content, date, idty, plateform, idas, note]
+        }, function (err, result, fields) {
+          if (err) {
+            console.log(err);
+            res.status(500).send({error: "Internal Server Error"});
+          }
+          console.log(result);
+          res.status(200).send();
+        });
+      }
 }); // créer un feedback
 
 app.put('/feedback/:idfe', function (req, res) {
