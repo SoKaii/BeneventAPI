@@ -90,7 +90,7 @@ CREATE TABLE event(
 	,CONSTRAINT event_PK PRIMARY KEY (idev)
 
 	,CONSTRAINT event_category_FK FOREIGN KEY (idcat) REFERENCES category(idcat)
-	,CONSTRAINT event_association0_FK FOREIGN KEY (idas) REFERENCES association(idas)
+	,CONSTRAINT event_association0_FK FOREIGN KEY (idas) REFERENCES association(idas) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 INSERT INTO event(name,description,dateDeb,dateFin,location,maxBenevole,idcat,idas,fakeevent) VALUES("Jour de la Nuit","Le Jour de la Nuit est une opération annuelle de sensibilisation à la pollution lumineuse, à la protection de la biodiversité nocturne et du ciel étoilé",'2020-06-26 20:00:00','2020-06-27 01:00:00',"Paris,",150,3,4,false);
@@ -124,7 +124,7 @@ CREATE TABLE posts(
 	,CONSTRAINT posts_PK PRIMARY KEY (idpo)
 
 	,CONSTRAINT posts_user_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
-	,CONSTRAINT posts_association0_FK FOREIGN KEY (idas) REFERENCES association(idas)
+	,CONSTRAINT posts_association0_FK FOREIGN KEY (idas) REFERENCES association(idas) ON DELETE CASCADE
 	,CONSTRAINT posts_event1_FK FOREIGN KEY (idev) REFERENCES event(idev)
 )ENGINE=InnoDB;
 
@@ -210,7 +210,7 @@ CREATE TABLE feedback(
         ida         Int
 	,CONSTRAINT feedback_PK PRIMARY KEY (idfe)
 
-	,CONSTRAINT feedback_association_FK FOREIGN KEY (idas) REFERENCES association(idas)
+	,CONSTRAINT feedback_association_FK FOREIGN KEY (idas) REFERENCES association(idas) ON DELETE CASCADE
 	,CONSTRAINT feedback_type0_FK FOREIGN KEY (idty) REFERENCES type(idty)
 	,CONSTRAINT feedback_user1_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 	,CONSTRAINT feedback_admin2_FK FOREIGN KEY (ida) REFERENCES admin(ida)
@@ -236,7 +236,7 @@ CREATE TABLE followers(
         idu  Int NOT NULL
 	,CONSTRAINT followers_PK PRIMARY KEY (idas,idu)
 
-	,CONSTRAINT followers_association_FK FOREIGN KEY (idas) REFERENCES association(idas)
+	,CONSTRAINT followers_association_FK FOREIGN KEY (idas) REFERENCES association(idas) ON DELETE CASCADE
 	,CONSTRAINT followers_user0_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
