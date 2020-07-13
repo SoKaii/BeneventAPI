@@ -123,7 +123,7 @@ CREATE TABLE posts(
         idev    Int NOT NULL
 	,CONSTRAINT posts_PK PRIMARY KEY (idpo)
 
-	,CONSTRAINT posts_user_FK FOREIGN KEY (idu) REFERENCES user(idu)
+	,CONSTRAINT posts_user_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 	,CONSTRAINT posts_association0_FK FOREIGN KEY (idas) REFERENCES association(idas)
 	,CONSTRAINT posts_event1_FK FOREIGN KEY (idev) REFERENCES event(idev)
 )ENGINE=InnoDB;
@@ -212,7 +212,7 @@ CREATE TABLE feedback(
 
 	,CONSTRAINT feedback_association_FK FOREIGN KEY (idas) REFERENCES association(idas)
 	,CONSTRAINT feedback_type0_FK FOREIGN KEY (idty) REFERENCES type(idty)
-	,CONSTRAINT feedback_user1_FK FOREIGN KEY (idu) REFERENCES user(idu)
+	,CONSTRAINT feedback_user1_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 	,CONSTRAINT feedback_admin2_FK FOREIGN KEY (ida) REFERENCES admin(ida)
 )ENGINE=InnoDB;
 
@@ -237,7 +237,7 @@ CREATE TABLE followers(
 	,CONSTRAINT followers_PK PRIMARY KEY (idas,idu)
 
 	,CONSTRAINT followers_association_FK FOREIGN KEY (idas) REFERENCES association(idas)
-	,CONSTRAINT followers_user0_FK FOREIGN KEY (idu) REFERENCES user(idu)
+	,CONSTRAINT followers_user0_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 
@@ -255,7 +255,7 @@ CREATE TABLE participation(
 	,CONSTRAINT participation_PK PRIMARY KEY (idev,idu)
 
 	,CONSTRAINT participation_event_FK FOREIGN KEY (idev) REFERENCES event(idev)
-	,CONSTRAINT participation_user0_FK FOREIGN KEY (idu) REFERENCES user(idu)
+	,CONSTRAINT participation_user0_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 INSERT INTO participation(idev,idu,status) VALUES(1,1,1);
@@ -296,5 +296,5 @@ CREATE TABLE interest(
 	,CONSTRAINT interest_PK PRIMARY KEY (idev,idu)
 
 	,CONSTRAINT interest_event_FK FOREIGN KEY (idev) REFERENCES event(idev)
-	,CONSTRAINT interest_user0_FK FOREIGN KEY (idu) REFERENCES user(idu)
+	,CONSTRAINT interest_user0_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 )ENGINE=InnoDB;
