@@ -32,10 +32,12 @@ app.post('/signup/user', async function (req, res) {
     const { age } = req.body;
     const { email } = req.body;
     const { password } = req.body;
+    const { phone } = req.body;
+    const { profilpicture } = req.body;
 
     await con.query({
-        sql: 'INSERT INTO `user` (`name`, `firstname`, `age`, `email`, `password`) VALUES (?,?,?,?,?)',
-        values: [name, firstname, age, email, password]
+        sql: 'INSERT INTO `user` (`name`, `firstname`, `age`, `email`, `password`,`phone`,`profilpicture`) VALUES (?,?,?,?,?,?,?)',
+        values: [name, firstname, age, email, password, phone, profilpicture]
     }, function (err, result, fields) {
         if (err) {
             if (err.code == "ER_DUP_ENTRY") {
