@@ -10,7 +10,7 @@ const con = mysql.createConnection({
     user: config.user, //user mysql
     password: config.password, //password mysql
     database: config.database, //database mysql
-    socketPath: config.socketPath
+    //socketPath: config.socketPath
 });
 
 app.use(express.json());

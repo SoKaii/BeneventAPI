@@ -15,10 +15,8 @@ CREATE TABLE user(
         email         Varchar (100) NOT NULL UNIQUE ,
 		    password      Varchar (50) NOT NULL ,
         phone         Varchar (12) ,
-        profilpicture Varchar (255) ,
-        address       Text ,
-        description   Varchar (250)
-	,CONSTRAINT user_PK PRIMARY KEY (idu)
+        profilpicture Varchar (255) 
+        ,CONSTRAINT user_PK PRIMARY KEY (idu)
 )ENGINE=InnoDB;
 
 INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Gomez","Aubree","1998-03-19","aubree.gomez@example.com","celeste","https://randomuser.me/api/portraits/women/23.jpg","0655443322");
