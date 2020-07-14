@@ -100,6 +100,21 @@ app.get('/user/:idu', function (req, res) {
     });
 }); // récupérer le user d'id
 
+app.get('/user/byasso/:idas', function (req, res) {
+    const { idas } = req.params;
+
+    con.query({
+        sql: 'SELECT user.* FROM `posts`,`user`,`association`,`event` WHERE user.idu = posts.idu and posts.idev = event.idev and event.idas = association.idas and association.idas = ?',
+        values: [idas]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+});
+
 app.get('/userdetail/:id', function (req, res) {
     const { id } = req.params;
 
@@ -157,7 +172,7 @@ app.post('/signup/association', async function (req, res) {
     const { password } = req.body;
     const { logo } = req.body;
     const { idcat } = req.body;
-    
+
     await con.query({
         sql: 'INSERT INTO `association` (`name`, `email`, `password`, `logo`, `idcat`) VALUES (?,?,?,?,?)',
         values: [name, email, password, logo, idcat]
