@@ -104,7 +104,7 @@ app.get('/user/byasso/:idas', function (req, res) {
     const { idas } = req.params;
 
     con.query({
-        sql: 'SELECT user.* FROM `posts`,`user`,`association`,`event` WHERE user.idu = posts.idu and posts.idev = event.idev and event.idas = association.idas and association.idas = ?',
+        sql: 'SELECT DISTINCT user.* FROM `posts`,`user`,`association`,`event` WHERE user.idu = posts.idu and posts.idev = event.idev and event.idas = association.idas and association.idas = ?',
         values: [idas]
     }, function (err, result, fields) {
         if (err) {
@@ -312,6 +312,7 @@ app.delete('/association/:id', function (req, res) {
             res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
+        res.status(204).send(result);
     });
 }); // supprimer l'association d'id
 
@@ -580,7 +581,11 @@ app.post('/trello/feedback', async function (req, res) {
 app.get('/posts/:idu', function (req, res) {
   const { idu } = req.params;
     con.query({
+<<<<<<< HEAD
         sql: 'SELECT posts.*,event.name as eventname,association.acronym as assoacro,association.logo as pictureprofilasso FROM `user`,`association`,`event`,`followers`,`posts` WHERE user.idu= followers.idu and followers.idas=association.idas and association.idas = event.idas and event.idev = posts.idev and user.idu = ?',
+=======
+        sql: 'SELECT posts.*,event.name as eventname,association.acronym as assoacro,association.logo FROM `user`,`association`,`event`,`followers`,`posts` WHERE user.idu= followers.idu and followers.idas=association.idas and association.idas = event.idas and event.idev = posts.idev and user.idu = ? ORDER BY posts.date DESC',
+>>>>>>> 0c48ea0fa259334cb2d243ea75283d2ece0f0825
         values: [idu]
     }, function (err, result, fields) {
         if (err) {
@@ -758,6 +763,20 @@ app.patch('/event/:idev', function (req, res) {
         res.status(200).send(result);
     });
 }); // modifier un event d'id
+
+app.delete('/event/:idev', function (req, res) {
+    const { idev } = req.params;
+
+    con.query({
+        sql: 'DELETE FROM `event` WHERE `idev` = ?',
+        values: [idev]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        res.status(204).send();
+    });
+});
 
 //FOLLOW ROUTES
 app.post('/follow',function (req, res) {

@@ -125,7 +125,7 @@ CREATE TABLE posts(
 
 	,CONSTRAINT posts_user_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 	,CONSTRAINT posts_association0_FK FOREIGN KEY (idas) REFERENCES association(idas) ON DELETE CASCADE
-	,CONSTRAINT posts_event1_FK FOREIGN KEY (idev) REFERENCES event(idev)
+	,CONSTRAINT posts_event1_FK FOREIGN KEY (idev) REFERENCES event(idev) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 INSERT INTO posts (message, date, idu, idas, idev) VALUES("Merci à tous pour votre participation !",'2020-06-27 08:57:44',NULL,4,1);
@@ -254,7 +254,7 @@ CREATE TABLE participation(
         enddate     Datetime
 	,CONSTRAINT participation_PK PRIMARY KEY (idev,idu)
 
-	,CONSTRAINT participation_event_FK FOREIGN KEY (idev) REFERENCES event(idev)
+	,CONSTRAINT participation_event_FK FOREIGN KEY (idev) REFERENCES event(idev) ON DELETE CASCADE
 	,CONSTRAINT participation_user0_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
@@ -295,6 +295,6 @@ CREATE TABLE interest(
         idu  Int NOT NULL
 	,CONSTRAINT interest_PK PRIMARY KEY (idev,idu)
 
-	,CONSTRAINT interest_event_FK FOREIGN KEY (idev) REFERENCES event(idev)
+	,CONSTRAINT interest_event_FK FOREIGN KEY (idev) REFERENCES event(idev) ON DELETE CASCADE
 	,CONSTRAINT interest_user0_FK FOREIGN KEY (idu) REFERENCES user(idu) ON DELETE CASCADE
 )ENGINE=InnoDB;
