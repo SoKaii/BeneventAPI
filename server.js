@@ -154,11 +154,12 @@ app.post('/signup/association', async function (req, res) {
     const { name } = req.body;
     const { email } = req.body;
     const { password } = req.body;
+    const { logo } = req.body;
     const { idcat } = req.body;
-
+    
     await con.query({
-        sql: 'INSERT INTO `association` (`name`, `email`, `password`, `idcat`) VALUES (?,?,?,?)',
-        values: [name, email, password, idcat]
+        sql: 'INSERT INTO `association` (`name`, `email`, `password`, `logo`, `idcat`) VALUES (?,?,?,?,?)',
+        values: [name, email, password, logo, idcat]
     }, function (err, result, fields) {
         if (err) {
             if (err.code == "ER_DUP_ENTRY") {
@@ -167,10 +168,11 @@ app.post('/signup/association', async function (req, res) {
                 res.status(400).send(err);
             }
         } else {
-          const idev = result[0].idev;
+            console.log(result.insertId);
+          const idas = result.insertId;
           con.query({
               sql: 'INSERT INTO event(`name`,`description`,`dateDeb`,`dateFin`,`location`,`maxBenevole`,`idcat`,`idas`,`fakeevent`) VALUES("","",\'2000-01-01 00:00:00\',\'2000-01-01 00:00:00\',"",0,7,?,true)',
-              values: [idev]
+              values: [idas]
           }, function (err, result, fields) {
               if (err) {
                   res.status(400).send(err);
@@ -267,11 +269,13 @@ app.patch('/association/:id', function (req, res) {
     const { phone } = req.body;
     const { website } = req.body;
     const { support } = req.body;
+    const { acronym } = req.body;
+    const { logo } = req.body;
     const { id } = req.params;
 
     con.query({
-        sql: 'Update `association` SET `name` = ?, `email` = ?, `phone` = ?, `website` = ?, `support` = ? WHERE `idas` = ?',
-        values: [name, email, phone, website, support, id]
+        sql: 'Update `association` SET `name` = ?, `email` = ?, `phone` = ?, `website` = ?, `support` = ?, `acronym`= ?, `logo`= ? WHERE `idas` = ?',
+        values: [name, email, phone, website, support, acronym, logo, id]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});

@@ -57,8 +57,8 @@ CREATE TABLE association(
         acronym  Varchar (50) ,
         email    Varchar (50) NOT NULL UNIQUE,
         phone    Varchar (12) ,
-        website  Varchar (50) ,
-        support  Varchar (50) ,
+        website  Varchar (250) ,
+        support  Varchar (250) ,
         password Varchar (50) NOT NULL ,
         idcat    Int NOT NULL
 	,CONSTRAINT association_PK PRIMARY KEY (idas)
