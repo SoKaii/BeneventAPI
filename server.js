@@ -114,22 +114,21 @@ app.get('/userdetail/:id', function (req, res) {
 });
 
 app.patch('/user/:idu', function (req, res) {
-    const { password } = req.body;
+    const { name } = req.body;
+    const { firstname } = req.body;
     const { phone } = req.body;
     const { profilpicture } = req.body;
-    const { address } = req.body;
-    const { bio } = req.body;
     const { idu } = req.params;
 
     con.query({
-        sql: 'UPDATE `user` SET `password` = ?, `phone` = ?, `profilpicture` = ?, `address` = ?, `bio` = ? WHERE `idu` = ?',
-        values: [password, phone, profilpicture, address, bio, idu]
+        sql: 'UPDATE `user` SET `name` = ?, `firstname` = ?, `phone` = ?, `profilpicture` = ? WHERE `idu` = ?',
+        values: [name, firstname, phone, profilpicture, idu]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
-        res.status(200).send(result);
+        res.status(200).send();
     });
 }); // modifier le user d'id
 
