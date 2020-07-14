@@ -10,7 +10,7 @@ const con = mysql.createConnection({
     user: config.user, //user mysql
     password: config.password, //password mysql
     database: config.database, //database mysql
-    socketPath: config.socketPath
+   // socketPath: config.socketPath
 });
 
 app.use(express.json());
@@ -580,7 +580,7 @@ app.post('/trello/feedback', async function (req, res) {
 app.get('/posts/:idu', function (req, res) {
   const { idu } = req.params;
     con.query({
-        sql: 'SELECT posts.*,event.name as eventname,association.acronym as assoacro,association.logo FROM `user`,`association`,`event`,`followers`,`posts` WHERE user.idu= followers.idu and followers.idas=association.idas and association.idas = event.idas and event.idev = posts.idev and user.idu = ?',
+        sql: 'SELECT posts.*,event.name as eventname,association.acronym as assoacro,association.logo FROM `user`,`association`,`event`,`followers`,`posts` WHERE user.idu= followers.idu and followers.idas=association.idas and association.idas = event.idas and event.idev = posts.idev and user.idu = ? ORDER BY posts.date DESC',
         values: [idu]
     }, function (err, result, fields) {
         if (err) {
