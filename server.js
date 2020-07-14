@@ -10,7 +10,7 @@ const con = mysql.createConnection({
     user: config.user, //user mysql
     password: config.password, //password mysql
     database: config.database, //database mysql
-   // socketPath: config.socketPath
+    socketPath: config.socketPath
 });
 
 app.use(express.json());
@@ -104,7 +104,7 @@ app.get('/user/byasso/:idas', function (req, res) {
     const { idas } = req.params;
 
     con.query({
-        sql: 'SELECT user.* FROM `posts`,`user`,`association`,`event` WHERE user.idu = posts.idu and posts.idev = event.idev and event.idas = association.idas and association.idas = ?',
+        sql: 'SELECT DISTINCT user.* FROM `posts`,`user`,`association`,`event` WHERE user.idu = posts.idu and posts.idev = event.idev and event.idas = association.idas and association.idas = ?',
         values: [idas]
     }, function (err, result, fields) {
         if (err) {
@@ -312,6 +312,7 @@ app.delete('/association/:id', function (req, res) {
             res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
+        res.status(204).send(result);
     });
 }); // supprimer l'association d'id
 
@@ -758,6 +759,20 @@ app.patch('/event/:idev', function (req, res) {
         res.status(200).send(result);
     });
 }); // modifier un event d'id
+
+app.delete('/event/:idev', function (req, res) {
+    const { idev } = req.params;
+
+    con.query({
+        sql: 'DELETE FROM `event` WHERE `idev` = ?',
+        values: [idev]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        res.status(204).send();
+    });
+});
 
 //FOLLOW ROUTES
 app.post('/follow',function (req, res) {
