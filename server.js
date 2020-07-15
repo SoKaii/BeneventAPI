@@ -10,7 +10,6 @@ const con = mysql.createConnection({
     user: config.user, //user mysql
     password: config.password, //password mysql
     database: config.database, //database mysql
-    socketPath: config.socketPath
 });
 
 app.use(express.json());
@@ -18,6 +17,10 @@ app.use(express.json());
 con.connect( function(err) {
     if (err) throw err;
     console.log('Connected !');
+});
+
+app.listen(PORT, function () {
+    console.log('Example app listening on port 3000 !');
 });
 
 app.get('/', function (req, res) {
@@ -950,6 +953,3 @@ app.get('/participants/:idev', function (req, res) {
     });
 }); // get all participants of an event
 
-app.listen(PORT, function () {
-    console.log('Example app listening on port 3000 !');
-});
