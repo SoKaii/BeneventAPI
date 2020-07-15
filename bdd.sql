@@ -281,3 +281,11 @@ INSERT INTO participation(idevent,iduser,status) VALUES(8,2,1);
 INSERT INTO participation(idevent,iduser,status) VALUES(8,3,1);
 INSERT INTO participation(idevent,iduser,status) VALUES(8,4,1);
 INSERT INTO participation(idevent,iduser,status) VALUES(8,5,1);
+
+CREATE TABLE news(
+        idnews            Int  Auto_increment  NOT NULL ,
+        title             Varchar (50) NOT NULL ,
+        content           Varchar (250) NOT NULL ,
+		    date			        Date NOT NULL ,
+        ,CONSTRAINT user_PK PRIMARY KEY (idnews)
+)ENGINE=InnoDB;
