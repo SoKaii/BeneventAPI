@@ -22,8 +22,8 @@ app.use(express.json());
 })();
 
 setInterval(function () {
-    app.query('SELECT 1');
-}, 5000);
+    con.query('SELECT 1');
+}, 3000);
 
 app.listen(PORT, function () {
     console.log('Example app listening on port 3000 !');
