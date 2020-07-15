@@ -14,7 +14,6 @@ const con = mysql.createConnection({
 
 app.use(express.json());
 
-
 (async function () {
   try {
     await con.connect();
@@ -22,7 +21,9 @@ app.use(express.json());
   } catch (err) { log(err.stack); }
 })();
 
-app.timeout = 0;
+setInterval(function () {
+    app.query('SELECT 1');
+}, 5000);
 
 app.listen(PORT, function () {
     console.log('Example app listening on port 3000 !');
