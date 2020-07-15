@@ -503,8 +503,8 @@ app.post('/trello/feedback', async function (req, res) {
                 console.log(result.id);
 
                 con.query({
-                    sql: 'UPDATE feedback SET idtrello = ?, status = ? WHERE idfeedback = ?',
-                    values: [idtrello, status, idfeedback]
+                    sql: 'UPDATE feedback SET idtrello = ?, status = ?, content = ? WHERE idfeedback = ?',
+                    values: [idtrello, status, desc, idfeedback]
                 }, function (err, result, fields) {
                     if (err) {
                         res.status(500).send({error: "Internal Server Error"});
@@ -532,8 +532,8 @@ app.post('/trello/feedback', async function (req, res) {
                 console.log(result.id);
 
                 con.query({
-                    sql: 'UPDATE feedback SET idtrello = ?, status = ? WHERE idfeedback = ?',
-                    values: [idtrello, status, idfeedback]
+                    sql: 'UPDATE feedback SET idtrello = ?, status = ?, content = ? WHERE idfeedback = ?',
+                    values: [idtrello, status, desc, idfeedback]
                 }, function (err, result, fields) {
                     if (err) {
                         res.status(500).send({error: "Internal Server Error"});
@@ -561,8 +561,8 @@ app.post('/trello/feedback', async function (req, res) {
                 console.log(result.id);
 
                 con.query({
-                    sql: 'UPDATE feedback SET idtrello = ? , status = ? WHERE idfeedback = ?',
-                    values: [idtrello, status, idfeedback]
+                    sql: 'UPDATE feedback SET idtrello = ?, status = ?, content = ? WHERE idfeedback = ?',
+                    values: [idtrello, status, desc, idfeedback]
                 }, function (err, result, fields) {
                     if (err) {
                         res.status(500).send({error: "Internal Server Error"});
