@@ -17,13 +17,13 @@ app.use(express.json());
 (async function () {
   try {
     await con.connect();
-    log('Connected !');
-  } catch (err) { log(err.stack); }
+    console.log('Connected !');
+  } catch (err) { console.log(err.stack); }
 })();
 
 setInterval(function () {
     con.query('SELECT 1');
-}, 3000);
+}, 10000);
 
 app.listen(PORT, function () {
     console.log('Example app listening on port 3000 !');
