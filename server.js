@@ -20,6 +20,10 @@ con.connect( function(err) {
     console.log('Connected !');
 });
 
+app.get('/', function (req, res) {
+    res.send('Hello World !')
+});
+
 // USER ROUTES
 
 app.post('/signup/user', async function (req, res) {
