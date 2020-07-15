@@ -18,8 +18,8 @@ app.use(express.json());
 (async function () {
   try {
     await con.connect();
-    log('Connected !');
-  } catch (err) { log(err.stack); }
+    console.log('Connected !');
+  } catch (err) { console.log(err.stack); }
 })();
 
 app.timeout = 0;
@@ -957,3 +957,20 @@ app.get('/participants/:idev', function (req, res) {
         res.status(200).send(result);
     });
 }); // get all participants of an event
+
+app.post('/news',function (req, res) {
+    const { title } = req.body;
+    const { content } = req.body;
+    const { date } = req.body;
+
+    con.query({
+        sql: 'INSERT INTO news (title, content, date) VALUES(?,?,?)',
+        values: [title, content, date]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: err});
+        }
+        console.log(result);
+        res.status(200).send();
+    });
+}); // permit an admin to send a news
