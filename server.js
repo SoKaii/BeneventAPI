@@ -14,10 +14,13 @@ const con = mysql.createConnection({
 
 app.use(express.json());
 
-con.connect( function(err) {
-    if (err) throw err;
-    console.log('Connected !');
-});
+
+(async function () {
+  try {
+    await con.connect();
+    log('Connected !');
+  } catch (err) { log(err.stack); }
+})();
 
 app.timeout = 0;
 
