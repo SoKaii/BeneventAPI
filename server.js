@@ -85,7 +85,7 @@ app.get('/user/:iduser', function (req, res) {
     const { iduser } = req.params;
 
     con.query({
-        sql: 'SELECT idu, name, firstname, age, profilpicture, phone FROM user WHERE iduser = ?',
+        sql: 'SELECT iduser, name, firstname, age, profilpicture, phone FROM user WHERE iduser = ?',
         values: [iduser]
     }, function (err, result, fields) {
         if (err) {
@@ -796,7 +796,7 @@ app.get('/follow/:idassociation/:iduser',function (req, res) {
     const { iduser } = req.params;
 
     con.query({
-        sql: 'SELECT * FROM follower WHEREidassociation = ? and iduser = ?',
+        sql: 'SELECT * FROM follower WHERE idassociation = ? and iduser = ?',
         values: [idassociation, iduser]
     }, function (err, result, fields) {
         if (err) {
