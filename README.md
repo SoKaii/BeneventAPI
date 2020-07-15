@@ -15,7 +15,6 @@ This repository is running on a [Heroku](https://www.heroku.com/) server accessi
 ## Prerequisites
 
 - An internet connection
-- https://benevent-esgi.herokuapp.com/
 
 ## Routes
 
@@ -367,7 +366,7 @@ This repository is running on a [Heroku](https://www.heroku.com/) server accessi
   - ``Message``
   - ``Date``
 
- `https://benevent-esgi.herokuapp.com/post/user Allows an user to create a post
+ `https://benevent-esgi.herokuapp.com/post/user`  Allows an user to create a post
 
 - **Body :** 
   - ``idEvent``
