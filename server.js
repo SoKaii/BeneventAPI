@@ -19,6 +19,8 @@ con.connect( function(err) {
     console.log('Connected !');
 });
 
+app.timeout = 0;
+
 app.listen(PORT, function () {
     console.log('Example app listening on port 3000 !');
 });
@@ -952,4 +954,3 @@ app.get('/participants/:idev', function (req, res) {
         res.status(200).send(result);
     });
 }); // get all participants of an event
-
