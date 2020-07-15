@@ -523,7 +523,7 @@ app.post('/trello/feedback', async function (req, res) {
                 console.log(
                     `Response: ${response.status} ${response.statusText}`
                 );
-                return response.status(response.status).text().send();
+                return response.text();
             })
             .then(text => {
                 var result = JSON.parse(text);
