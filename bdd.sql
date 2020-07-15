@@ -15,15 +15,15 @@ CREATE TABLE user(
         email         Varchar (100) NOT NULL UNIQUE ,
 		    password      Varchar (50) NOT NULL ,
         phone         Varchar (12) ,
-        profilpicture Varchar (255) 
+        profilpicture Varchar (255)
         ,CONSTRAINT user_PK PRIMARY KEY (iduser)
 )ENGINE=InnoDB;
 
-INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Gomez","Aubree","1998-03-19","aubree.gomez@example.com","celeste","https://randomuser.me/api/portraits/women/23.jpg","0655443322");
-INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("John","Doe","1992-04-08","jd@test.fr","JohnDoe","https://randomuser.me/api/portraits/men/79.jpg","+33612141512");
-INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Jacobs","Adrian","2000-05-02","adrian.jacobs@example.com","ring","https://randomuser.me/api/portraits/lego/6.jpg","+33612345678");
-INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Brandie","Mason","1988-01-28","brandie.mason@example.com","sandrine","https://randomuser.me/api/portraits/women/3.jpg","0678901234");
-INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Maurice","Barnett","1981-05-28","maurice.barnett@example.com","angus1","https://randomuser.me/api/portraits/men/3.jpg","0611223344");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Gomez","Aubree","1998-03-19","aubree.gomez@example.com","e138262cdff78ec6b6db6a3183fc28f4","https://randomuser.me/api/portraits/women/23.jpg","0655443322");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("John","Doe","1992-04-08","jd@test.fr","9fd9f63ed648753756975da85ac7f","https://randomuser.me/api/portraits/men/79.jpg","+33612141512");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Jacobs","Adrian","2000-05-02","adrian.jacobs@example.com","1a5df958e0f29d35594c7cf057fe4bd1","https://randomuser.me/api/portraits/lego/6.jpg","+33612345678");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Brandie","Mason","1988-01-28","brandie.mason@example.com","f441e9a8f7c06e9721b44f8bd2be1","https://randomuser.me/api/portraits/women/3.jpg","0678901234");
+INSERT INTO user(name,firstname,age,email,password,profilpicture,phone) values("Maurice","Barnett","1981-05-28","maurice.barnett@example.com","2f80f7897a714ba2ff39fb8356d32072","https://randomuser.me/api/portraits/men/3.jpg","0611223344");
 
 #------------------------------------------------------------
 # Table: category
