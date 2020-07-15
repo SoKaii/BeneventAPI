@@ -64,10 +64,10 @@ CREATE TABLE association(
 	,CONSTRAINT association_category_FK FOREIGN KEY (idcategory) REFERENCES category(idcategory)
 )ENGINE=InnoDB;
 
-INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcategory) values('Croix-Rouge', 'https://nsa40.casimages.com/img/2020/06/25/20062511235323873.jpg', 'CR', 'cr@cr.fr', '0123456789', 'https://www.croix-rouge.fr/', 'www.donner.croix-rouge.fr', 'cr', 4);
-INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcategory) values('Medecin Sans Frontiere', 'https://nsa40.casimages.com/img/2020/07/06/200706065034573482.png', 'MSF', 'msf@msf.fr', '0123456789', 'https://www.msf.fr/', 'soutenir.msf.fr/b/mon-don', 'msf', 4);
-INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcategory) values('Société protectrice des animaux', 'https://nsa40.casimages.com/img/2020/07/06/200706065034511321.png', 'SPA', 'spa@spa.fr', '0123456789', 'https://www.la-spa.fr/', 'soutenir.la-spa.fr/b/mon-don', 'spa', 1);
-INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcategory) values('Agir pour l\'environnement', 'https://nsa40.casimages.com/img/2020/07/06/200706065034827123.png', 'APE', 'ape@ape.fr', '0123456789', 'https://www.agirpourlenvironnement.org/', 'soutenir.agirpourlenvironnement.org/b/mon-don', 'ape', 3);
+INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcategory) values('Croix-Rouge', 'https://nsa40.casimages.com/img/2020/06/25/20062511235323873.jpg', 'CR', 'cr@cr.fr', '0123456789', 'https://www.croix-rouge.fr/', 'www.donner.croix-rouge.fr', '324d8a1d3f81e730d5099a48cee0c5b6', 4);
+INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcategory) values('Medecin Sans Frontiere', 'https://nsa40.casimages.com/img/2020/07/06/200706065034573482.png', 'MSF', 'msf@msf.fr', '0123456789', 'https://www.msf.fr/', 'soutenir.msf.fr/b/mon-don', '2cf79e8f137b5429d1c5a5351e00c5de', 4);
+INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcategory) values('Société protectrice des animaux', 'https://nsa40.casimages.com/img/2020/07/06/200706065034511321.png', 'SPA', 'spa@spa.fr', '0123456789', 'https://www.la-spa.fr/', 'soutenir.la-spa.fr/b/mon-don', 'cc91e646ffef196e61f25dce2ada9ae5', 1);
+INSERT INTO association(name, logo, acronym, email, phone, website, support, password, idcategory) values('Agir pour l\'environnement', 'https://nsa40.casimages.com/img/2020/07/06/200706065034827123.png', 'APE', 'ape@ape.fr', '0123456789', 'https://www.agirpourlenvironnement.org/', 'soutenir.agirpourlenvironnement.org/b/mon-don', '180031a348c14d401143be02fe7708f5', 3);
 
 
 #------------------------------------------------------------
