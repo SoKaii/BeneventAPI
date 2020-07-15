@@ -591,7 +591,7 @@ app.get('/posts/:iduser', function (req, res) {
     });
 }); // get all posts concerned by an user
 
-app.get('/posts/asso/:idassociation', function (req, res) {
+app.get('/posts/association/:idassociation', function (req, res) {
     const { idassociation } = req.params;
 
     con.query({
