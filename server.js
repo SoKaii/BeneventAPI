@@ -362,7 +362,7 @@ app.get('/feedback/:idtype', function (req, res) {
     });
 }); // get all feedback concerned by a type
 
-app.post('/feedback/bug', function (req, res) {
+app.post('/feedback/bug', cors(), function (req, res) {
     const { title } = req.body;
     const { content } = req.body;
     const { date } = req.body;
@@ -412,7 +412,7 @@ app.post('/feedback/bug', function (req, res) {
     }
 }); // post a new feedback in db
 
-app.post('/feedback/rating', function (req, res) {
+app.post('/feedback/rating', cors(), function (req, res) {
     const { content } = req.body;
     const { date } = req.body;
     const { platform } = req.body;
