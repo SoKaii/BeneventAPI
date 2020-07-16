@@ -503,6 +503,26 @@ app.delete('/unfollow',function (req, res) {
 }); // permit an user to unfollow an association
 
 
+// NEWS ROUTES
+
+app.post('/news',function (req, res) {
+    const { title } = req.body;
+    const { content } = req.body;
+    const { date } = req.body;
+
+    con.query({
+        sql: 'INSERT INTO news (title, content, date) VALUES(?,?,?)',
+        values: [title, content, date]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: err});
+        }
+        console.log(result);
+        res.status(200).send();
+    });
+}); // permit an admin to send a news
+
+
 // PARTICIPATION ROUTES
 
 app.get('/participants/:idev', function (req, res) {
@@ -723,26 +743,6 @@ app.delete('/post/:idpost', function (req, res) {
     });
 }); // delete a post by idpost
   
-
-// NEWS ROUTES
-
-app.post('/news',function (req, res) {
-    const { title } = req.body;
-    const { content } = req.body;
-    const { date } = req.body;
-
-    con.query({
-        sql: 'INSERT INTO news (title, content, date) VALUES(?,?,?)',
-        values: [title, content, date]
-    }, function (err, result, fields) {
-        if (err) {
-            res.status(500).send({error: err});
-        }
-        console.log(result);
-        res.status(200).send();
-    });
-}); // permit an admin to send a news
-
 
 // TRELLO ROUTES
 

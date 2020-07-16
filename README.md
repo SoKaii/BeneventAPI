@@ -278,6 +278,27 @@ This repository is running on a [Heroku](https://www.heroku.com/) server accessi
 
 
 
+### News
+
+|  Field  |                Description                 |  Type  |
+| :-----: | :----------------------------------------: | :----: |
+| idnews  | The news unique id. :closed_lock_with_key: |  Int   |
+|  title  |               The news title               | String |
+| content |          The content of the news           | String |
+
+
+
+##### POST
+
+ `https://benevent-esgi.herokuapp.com/news`  Allows an admin to create a news :
+
+- **Body :** 
+  - ``Title``
+  - ``Content``
+  - ``Date``
+
+
+
 ### Participation
 
 |    Field    |                   Description                   | Type |
