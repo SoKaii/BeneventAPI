@@ -371,7 +371,20 @@ app.post('/feedback/bug', function (req, res) {
     const { iduser } = req.body;
     const { idassociation } = req.body;
 
-    if(idassociation == null){
+    if(platform == "FLUTTER"){
+      con.query({
+          sql: 'INSERT INTO feedback (title, content, date, idtype, platform) VALUES (?,?,?,?,?)',
+          values: [title, content, date, idtype, platform]
+      }, function (err, result, fields) {
+          if (err) {
+            console.log(err);
+              res.status(500).send({error: "Internal Server Error"});
+          }
+          console.log(result);
+          res.status(200).send();
+      });
+    }
+    else if(idassociation == null){
       con.query({
           sql: 'INSERT INTO feedback (title, content, date, idtype, platform, iduser) VALUES (?,?,?,?,?,?)',
           values: [title, content, date, idtype, platform, iduser]
@@ -408,7 +421,20 @@ app.post('/feedback/rating', function (req, res) {
     const { idassociation } = req.body;
     const { note } = req.body;
 
-    if(idassociation == null){
+    if(platform == "FLUTTER"){
+      con.query({
+          sql: 'INSERT INTO feedback (content, date, note, idtype, platform) VALUES (?,?,?,?,?)',
+          values: [content, date, note, idtype, platform]
+      }, function (err, result, fields) {
+          if (err) {
+            console.log(err);
+              res.status(500).send({error: "Internal Server Error"});
+          }
+          console.log(result);
+          res.status(200).send();
+      });
+    }
+    else if(idassociation == null){
       con.query({
         sql: 'INSERT INTO feedback (content, date, idtype, platform, iduser, note) VALUES (?,?,?,?,?,?)',
         values: [content, date, idtype, platform, iduser, note]
