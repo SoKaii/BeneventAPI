@@ -774,7 +774,7 @@ app.delete('/post/:idpost', function (req, res) {
     const { idpost } = req.params;
 
     con.query({
-        sql: 'DELETE FROM posts WHERE idpost = ?',
+        sql: 'DELETE FROM post WHERE idpost = ?',
         values: [idpost]
     }, function (err, result, fields) {
         if (err) {
