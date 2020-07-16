@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const fetch = require('node-fetch');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -329,11 +330,11 @@ app.patch('/event/:idevent', function (req, res) {
     });
 }); // modify an event by idevent
 
-app.delete('/event/:idev', function (req, res) {
+app.delete('/event/:idevent', function (req, res) {
     const { idev } = req.params;
 
     con.query({
-        sql: 'DELETE FROM event WHERE idev = ?',
+        sql: 'DELETE FROM event WHERE idevent = ?',
         values: [idev]
     }, function (err, result, fields) {
         if (err) {
@@ -342,7 +343,7 @@ app.delete('/event/:idev', function (req, res) {
         res.status(204).send();
     });
 }); // delete an event by idevent
-  
+
 
 // FEEDBACK ROUTES
 
@@ -505,7 +506,20 @@ app.delete('/unfollow',function (req, res) {
 
 // NEWS ROUTES
 
-app.post('/news',function (req, res) {
+app.get('/news',cors(),function (req, res) {
+
+    con.query({
+        sql: 'SELECT * FROM news ORDER BY date DESC LIMIT 3',
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: err});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+}); // get all news
+
+app.post('/news',cors(),function (req, res) {
     const { title } = req.body;
     const { content } = req.body;
     const { date } = req.body;
@@ -662,7 +676,7 @@ app.get('/posts/:iduser', function (req, res) {
           res.status(200).send(result);
       });
   }); // get all posts concerned by an user
-  
+
 app.get('/posts/association/:idassociation', function (req, res) {
     const { idassociation } = req.params;
 
@@ -742,7 +756,7 @@ app.delete('/post/:idpost', function (req, res) {
         res.status(204).send();
     });
 }); // delete a post by idpost
-  
+
 
 // TRELLO ROUTES
 
@@ -988,13 +1002,3 @@ app.delete('/user/:iduser', function (req, res) {
         res.status(200).send(result);
     });
 }); // delete user by iduser
-
-
-
-
-
-
-
-
-
-
