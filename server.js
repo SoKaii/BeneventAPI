@@ -332,11 +332,11 @@ app.patch('/event/:idevent', function (req, res) {
 }); // modify an event by idevent
 
 app.delete('/event/:idevent', function (req, res) {
-    const { idev } = req.params;
+    const { idevent } = req.params;
 
     con.query({
         sql: 'DELETE FROM event WHERE idevent = ?',
-        values: [idev]
+        values: [idevent]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
@@ -774,7 +774,7 @@ app.delete('/post/:idpost', function (req, res) {
     const { idpost } = req.params;
 
     con.query({
-        sql: 'DELETE FROM posts WHERE idpost = ?',
+        sql: 'DELETE FROM post WHERE idpost = ?',
         values: [idpost]
     }, function (err, result, fields) {
         if (err) {
@@ -995,6 +995,19 @@ app.post('/signin/user', async function (req, res) {
         }
     });
 }); // permit user to connect
+
+app.get('/statistic', function (req, res) {
+
+    con.query({
+        sql: 'SELECT (SELECT COUNT(*) FROM user) AS numberuser, (SELECT COUNT(*) FROM association) AS numberassociation, (SELECT AVG(postbyevent.numberposts) AS averagepostperevent FROM (SELECT COUNT(*) AS numberposts FROM post GROUP BY idevent) AS postbyevent, post GROUP BY post.idevent LIMIT 1 ) AS averagepostbyevent, (SELECT COUNT(*) FROM event WHERE startdate > now()) AS numbereventnotstarted, (SELECT COUNT(*) FROM event WHERE startdate < now() and enddate > now()) AS numbereventinprogress, (SELECT COUNT(*) FROM event WHERE enddate < now()) AS numbereventended, (SELECT AVG(eventperasso.numberevent) AS averageeventperasso FROM (SELECT COUNT(*) AS numberevent FROM event GROUP BY idassociation) AS eventperasso, event GROUP BY event.idassociation LIMIT 1) AS averageeventperasso',
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+}); // get all statistic from db
 
 app.patch('/user/:iduser', function (req, res) {
     const { name } = req.body;
