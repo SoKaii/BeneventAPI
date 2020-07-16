@@ -384,7 +384,7 @@ app.post('/feedback/bug', function (req, res) {
           res.status(200).send();
       });
     }
-    if(iduser == null){
+    else if(iduser == null){
       con.query({
           sql: 'INSERT INTO feedback (title, content, date, idtype, platform, idassociation) VALUES (?,?,?,?,?,?)',
           values: [title, content, date, idtype, platform, idassociation]
@@ -421,7 +421,7 @@ app.post('/feedback/rating', function (req, res) {
           res.status(200).send();
         });
       }
-      if(iduser == null){
+      else if(iduser == null){
         con.query({
           sql: 'INSERT INTO feedback (content, date, idtype, platform, idassociation, note) VALUES (?,?,?,?,?,?)',
           values: [content, date, idtype, platform, idassociation, note]
