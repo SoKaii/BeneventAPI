@@ -332,11 +332,11 @@ app.patch('/event/:idevent', function (req, res) {
 }); // modify an event by idevent
 
 app.delete('/event/:idevent', function (req, res) {
-    const { idev } = req.params;
+    const { idevent } = req.params;
 
     con.query({
         sql: 'DELETE FROM event WHERE idevent = ?',
-        values: [idev]
+        values: [idevent]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
