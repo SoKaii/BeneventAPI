@@ -18,6 +18,8 @@ DELETE FROM participation;
 ALTER TABLE participation AUTO_INCREMENT = 1;
 DELETE FROM type;
 ALTER TABLE type AUTO_INCREMENT = 1;
+DELETE FROM news;
+ALTER TABLE news AUTO_INCREMENT = 1;
 
 #------------------------------------------------------------------------------------
 # Data category
