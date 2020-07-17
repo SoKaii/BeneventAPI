@@ -588,7 +588,7 @@ app.post('/participate',function (req, res) {
         res.status(200).send();
     });
 }); // permit an user to signup of an event
-
+ 
 app.patch('/participate/refuse',function (req, res) {
     const { status } = req.body;
     const { participate } = req.body;
