@@ -242,6 +242,21 @@ app.get('/category/:idcategory', function (req, res) {
     });
 }); // get category by idcategory
 
+app.post('/category', function (req, res) {
+    const { name } = req.body;
+
+    con.query({
+        sql: 'INSERT INTO category (name) VALUES (?)',
+        values: [name]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: "Internal Server Error"});
+        }
+        console.log(result);
+        res.status(200).send();
+    });
+}); // create a new category in db
+
 
 // EVENT ROUTES
 
