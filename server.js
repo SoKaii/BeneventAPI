@@ -596,7 +596,7 @@ app.get('/participate/:idevent',function (req, res) {
 
     con.query({
         sql: 'SELECT COUNT(*) FROM participation WHERE idevent = ? ',
-        values: [idevent, iduser]
+        values: [idevent]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: err});
