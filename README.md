@@ -195,11 +195,11 @@ This repository is running on a [Heroku](https://www.heroku.com/) server accessi
 |     date      |                  The date of the feedback.                   |  Date  |
 |    status     |                The progress of the feedback.                 | String |
 |   idtrello    |             The Trello Card ID of the feedback.              | String |
-|   plateform   |      Identify from wich application the feedback comes.      | String |
+|   platform   |      Identify from wich application the feedback comes.      | String |
 |     note      |     Rating of the app on 5 *(Only for rating feedback)*      |  Int   |
-| idassociation | ID of the association wich makes the feedback *(Only for iOS & Flutter plateform)* :key: |  Int   |
+| idassociation | ID of the association wich makes the feedback *(Only for iOS & Flutter platform)* :key: |  Int   |
 |    idtype     |            ID of the type of the feedback. :key:             |  Int   |
-|    iduser     | ID of the user wich makes the feedback *(Only for Android & Flutter plateform) :key:* |  Int   |
+|    iduser     | ID of the user wich makes the feedback *(Only for Android & Flutter platform) :key:* |  Int   |
 |    idadmin    |  ID of the administrator who processed the feedback. :key:   |  Int   |
 
 
@@ -218,7 +218,7 @@ This repository is running on a [Heroku](https://www.heroku.com/) server accessi
   - ``Title``
   - ``Content``
   - ``Date``
-  - ``Plateform``
+  - ``Platform``
   - ``idType``
   - ``idUser``
   - `idAssociation`
@@ -228,7 +228,7 @@ This repository is running on a [Heroku](https://www.heroku.com/) server accessi
 - **Body :** 
   - ``Content``
   - ``Date``
-  - ``Plateform``
+  - ``Platform``
   - ``idType``
   - ``idUser``
   - `idAssociation`
