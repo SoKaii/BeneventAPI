@@ -95,7 +95,7 @@ INSERT INTO event(name, description, startdate, enddate, location, maxbenevole, 
         
 INSERT INTO event(name, description, startdate, enddate, location, maxbenevole, idcategory, idassociation, fakeevent) VALUES('Recherche bénévoles "L’Europe du polar"', "Dans le cadre du programme européen DETECT Bibliocité et ses partenaires présentent une exposition intitulée « L’Europe du Polar »  destinée à tous les publics. Pour cela nous rechercons des accompagnateurs bénévoles pour nos visiteurs !", "2020-07-01 08:00:00", "2020-07-04 18:00:00", "48/50, rue du Cardinal Lemoine, 75005, Bibliothèque des littératures policères", 12, 2, 4, false);
 INSERT INTO event(name, description, startdate, enddate, location, maxbenevole, idcategory, idassociation, fakeevent) VALUES("Cities for freedom. 10 ans de l’ICORN", "Bibliocité, à la demande de la Maire de Paris, a développé à l’occasion des 10 ans de l’ICORN qui se déroulaient au sein de l’Hôtel de Ville, une programmation culturelle. Nous recherchons 2 ingénieurs du son !", "2020-07-22 15:00:00", "2020-07-24 18:00:00", "place de l'Hôtel de Ville, 75004, Hôtel de Ville", 4, 2, 4, false);
-INSERT INTO event(name, description, startdate, enddate, location, maxbenevole, idcategory, idassociation, fakeevent) VALUES("Prix Premier Roman", "Ce prix, mis en place en 2017, permet de fédérer des bibliothèques et des lecteurs autour de l’actualité éditoriale de premiers romans des rentrées littéraires de septembre et de janvier. Participez vous aussi au jury de cette année !", "2020-09-01 08:00:00" "2020-09-01 21:00:00", "2, rue Perrée, 75003, Carreau du Temple", 5, 2, 4, false);
+INSERT INTO event(name, description, startdate, enddate, location, maxbenevole, idcategory, idassociation, fakeevent) VALUES("Prix Premier Roman", "Ce prix, mis en place en 2017, permet de fédérer des bibliothèques et des lecteurs autour de l’actualité éditoriale de premiers romans des rentrées littéraires de septembre et de janvier. Participez vous aussi au jury de cette année !", "2020-09-01 08:00:00", "2020-09-01 21:00:00", "2, rue Perrée, 75003, Carreau du Temple", 5, 2, 4, false);
         
 INSERT INTO event(name, description, startdate, enddate, location, maxbenevole, idcategory, idassociation, fakeevent) VALUES("PÉTITION Pesticides", "Stop aux pesticides de synthèse à proximité des habitations ! Nous recherchons des agriculteurs, qui viendraient présenter l'inconvenient de ce poison !", "2020-06-11 14:00:00", "2020-06-11 18:00:00", "place de la République, 75011", 6, 3, 5, false);
 INSERT INTO event(name, description, startdate, enddate, location, maxbenevole, idcategory, idassociation, fakeevent) VALUES("PÉTITION Plastiques", "Interdisons le plastique à usage unique ! Nous recherchons un photographe bénévole pour la publication de photo de l'évènement !", "2020-07-15 14:00:00", "2020-07-15 18:00:00", "place de la République, 75011", 1, 3, 5, false);
@@ -259,7 +259,7 @@ INSERT INTO post(message, date, iduser, idassociation, idevent) VALUES("Le WWF p
 
 #----Asso 3 - FAKE----
 
-INSERT INTO post(message, date, iduser, idassociation, idevent) VALUES("L’Avef et la LFPC alertent, une nouvelle fois, sur les dérives de l’endurance équestre en matière de bien-être animal et de dopage !", "2020-06-11 21:41:22", NULL, 3, 37):
+INSERT INTO post(message, date, iduser, idassociation, idevent) VALUES("L’Avef et la LFPC alertent, une nouvelle fois, sur les dérives de l’endurance équestre en matière de bien-être animal et de dopage !", "2020-06-11 21:41:22", NULL, 3, 37);
 
 #----Asso 4 - FAKE----
 
@@ -330,23 +330,60 @@ INSERT INTO admin(login,password,email) values("admin_03","thomas","t.martin9250
 # Data feedback
 #------------------------------------------------------------------------------------
 
-INSERT INTO feedback(title, content, date, plateform, status, idtype, iduser) VALUES("Bug Ecran de démarrage", "Ecran noir pendant 5 secondes au démarrage de l'application", "2020-06-11 04:56:33", "ANDROID", "", 1, 1);
-INSERT INTO feedback(title, content, date, plateform, status, idtype, iduser) VALUES("Probleme suppresion de compte", "Quand je supprime mon compte, il y a marqué OK mais je peux encore me connecter avec après", "2020-07-01 11:32:56", "FLUTTER", "", 1, 2);
-INSERT INTO feedback(title, content, date, plateform, status, idtype, iduser) VALUES("Pas de contenue", "Le contenue n'arrive pas à se charger sur chaque page", "2020-05-23 23:33:12", "ANDROID", "", 1, 3);
-INSERT INTO feedback(title, content, date, plateform, status, idtype, idassociation) VALUES("Pas de bouton", "Dans l'onglet amélioration le bouton est a moitié en dehors de l'écran", "2020-07-22 14:55:06", "IOS", "", 1, 6);
-INSERT INTO feedback(title, content, date, plateform, status, idtype, iduser) VALUES("Details sur l'association", "L'onglet détails des associations n'affiche pas d'informations", "2020-07-05 11:33:56", "ANDROID", "", 1, 8);
+INSERT INTO feedback(title, content, date, platform, status, idtype, iduser) VALUES("Bug Ecran de démarrage", "Ecran noir pendant 5 secondes au démarrage de l'application", "2020-06-11 04:56:33", "ANDROID", "", 1, 1);
+INSERT INTO feedback(title, content, date, platform, status, idtype, iduser) VALUES("Probleme suppresion de compte", "Quand je supprime mon compte, il y a marqué OK mais je peux encore me connecter avec après", "2020-07-01 11:32:56", "FLUTTER", "", 1, 2);
+INSERT INTO feedback(title, content, date, platform, status, idtype, iduser) VALUES("Pas de contenue", "Le contenue n'arrive pas à se charger sur chaque page", "2020-05-23 23:33:12", "ANDROID", "", 1, 3);
+INSERT INTO feedback(title, content, date, platform, status, idtype, idassociation) VALUES("Pas de bouton", "Dans l'onglet amélioration le bouton est a moitié en dehors de l'écran", "2020-07-22 14:55:06", "IOS", "", 1, 6);
+INSERT INTO feedback(title, content, date, platform, status, idtype, iduser) VALUES("Details sur l'association", "L'onglet détails des associations n'affiche pas d'informations", "2020-07-05 11:33:56", "ANDROID", "", 1, 8);
 
-INSERT INTO feedback(content, date, plateform, status, note, idtype, iduser) VALUES("La note pourrait être meilleure si le button de login était plus stylisé", "2020-06-11 20:37:59", "ANDROID", "", 4, 2, 8);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, iduser) VALUES("Ameliorer le design, les textes sont trop petits pour moi", "2020-05-14 15:21:21", "ANDROID", "", 4, 2, 11);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, iduser) VALUES("Les informations sur les évènements sont imprécises", "2020-07-11 06:33:56", "ANDROID", "", 1, 2, 5);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, iduser) VALUES("NUL", "2020-05-26 11:27:58", "ANDROID", "", 0, 2, 7);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, iduser) VALUES("La meilleure application !!!!", "2020-07-19 18:57:01", "ANDROID", "", 5, 2, 4);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, iduser) VALUES("Surement un des meilleurs moyen de se tenir informé des événements de ses associations favorites !", "2020-07-05 23:57:38", "ANDROID", "", 5, 2, 12);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, iduser) VALUES("L'application web est très pratique ! Dommage que le style soit un peu moyen", "2020-07-22 11:00:58", "FLUTTER", "", 3, 2, 1);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, idassociation) VALUES("L'application est bien et permet de passer moins de temps à gérer les bénévoles présents !", "2020-06-15 17:54:23", "IOS", "", 4, 2, 8);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, idassociation) VALUES("Cool, dommage que les posts et les descriptions d'évènements soit si court !", "2020-06-22 18:05:22", "IOS", "", 4, 2, 10);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, idassociation) VALUES("VRAIMENT LA PIRE APPLICATION DU MONDE !!!!!!", "2020-05-29", "IOS", "", 0, 2, 5);
-INSERT INTO feedback(content, date, plateform, status, note, idtype, idassociation) VALUES("Trop peu d'informations sur les bénévoles", "2020-06-27 11:54:06", "IOS", "", 3, 2, 12);
+INSERT INTO feedback(content, date, platform, status, note, idtype, iduser) VALUES("La note pourrait être meilleure si le button de login était plus stylisé", "2020-06-11 20:37:59", "ANDROID", "", 4, 2, 8);
+INSERT INTO feedback(content, date, platform, status, note, idtype, iduser) VALUES("Ameliorer le design, les textes sont trop petits pour moi", "2020-05-14 15:21:21", "ANDROID", "", 4, 2, 11);
+INSERT INTO feedback(content, date, platform, status, note, idtype, iduser) VALUES("Les informations sur les évènements sont imprécises", "2020-07-11 06:33:56", "ANDROID", "", 1, 2, 5);
+INSERT INTO feedback(content, date, platform, status, note, idtype, iduser) VALUES("NUL", "2020-05-26 11:27:58", "ANDROID", "", 0, 2, 7);
+INSERT INTO feedback(content, date, platform, status, note, idtype, iduser) VALUES("La meilleure application !!!!", "2020-07-19 18:57:01", "ANDROID", "", 5, 2, 4);
+INSERT INTO feedback(content, date, platform, status, note, idtype, iduser) VALUES("Surement un des meilleurs moyen de se tenir informé des événements de ses associations favorites !", "2020-07-05 23:57:38", "ANDROID", "", 5, 2, 12);
+INSERT INTO feedback(content, date, platform, status, note, idtype, iduser) VALUES("L'application web est très pratique ! Dommage que le style soit un peu moyen", "2020-07-22 11:00:58", "FLUTTER", "", 3, 2, 1);
+INSERT INTO feedback(content, date, platform, status, note, idtype, idassociation) VALUES("L'application est bien et permet de passer moins de temps à gérer les bénévoles présents !", "2020-06-15 17:54:23", "IOS", "", 4, 2, 8);
+INSERT INTO feedback(content, date, platform, status, note, idtype, idassociation) VALUES("Cool, dommage que les posts et les descriptions d'évènements soit si court !", "2020-06-22 18:05:22", "IOS", "", 4, 2, 10);
+INSERT INTO feedback(content, date, platform, status, note, idtype, idassociation) VALUES("VRAIMENT LA PIRE APPLICATION DU MONDE !!!!!!", "2020-05-29", "IOS", "", 0, 2, 5);
+INSERT INTO feedback(content, date, platform, status, note, idtype, idassociation) VALUES("Trop peu d'informations sur les bénévoles", "2020-06-27 11:54:06", "IOS", "", 3, 2, 12);
+
+#-----------------------------------------------------------------------------------
+# Data follower
+#-----------------------------------------------------------------------------------
+
+INSERT INTO follower(idassociation, iduser) VALUES(8, 7);
+INSERT INTO follower(idassociation, iduser) VALUES(6, 7);
+INSERT INTO follower(idassociation, iduser) VALUES(9, 5);
+INSERT INTO follower(idassociation, iduser) VALUES(8, 17);
+INSERT INTO follower(idassociation, iduser) VALUES(5, 17);
+INSERT INTO follower(idassociation, iduser) VALUES(1, 2);
+INSERT INTO follower(idassociation, iduser) VALUES(8, 2);
+INSERT INTO follower(idassociation, iduser) VALUES(4, 21);
+INSERT INTO follower(idassociation, iduser) VALUES(9, 21);
+INSERT INTO follower(idassociation, iduser) VALUES(8, 19);
+INSERT INTO follower(idassociation, iduser) VALUES(1, 19);
+INSERT INTO follower(idassociation, iduser) VALUES(6, 19);
+INSERT INTO follower(idassociation, iduser) VALUES(9, 19);
+INSERT INTO follower(idassociation, iduser) VALUES(9, 4);
+INSERT INTO follower(idassociation, iduser) VALUES(2, 4);
+INSERT INTO follower(idassociation, iduser) VALUES(10, 1);
+INSERT INTO follower(idassociation, iduser) VALUES(2, 9);
+INSERT INTO follower(idassociation, iduser) VALUES(5, 9);
+INSERT INTO follower(idassociation, iduser) VALUES(8, 11);
+INSERT INTO follower(idassociation, iduser) VALUES(8, 16);
+INSERT INTO follower(idassociation, iduser) VALUES(9, 18);
+INSERT INTO follower(idassociation, iduser) VALUES(10, 6);
+INSERT INTO follower(idassociation, iduser) VALUES(10, 10);
+INSERT INTO follower(idassociation, iduser) VALUES(6, 12);
+INSERT INTO follower(idassociation, iduser) VALUES(5, 14);
+INSERT INTO follower(idassociation, iduser) VALUES(12, 3);
+INSERT INTO follower(idassociation, iduser) VALUES(7, 3);
+INSERT INTO follower(idassociation, iduser) VALUES(11, 8);
+INSERT INTO follower(idassociation, iduser) VALUES(7, 13);
+INSERT INTO follower(idassociation, iduser) VALUES(3, 15);
+INSERT INTO follower(idassociation, iduser) VALUES(12, 20);
+INSERT INTO follower(idassociation, iduser) VALUES(3, 22);
 
 #------------------------------------------------------------------------------------
 # Data participation

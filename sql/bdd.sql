@@ -175,6 +175,6 @@ CREATE TABLE news(
         idnews            Int  Auto_increment  NOT NULL ,
         title             Varchar (50) NOT NULL ,
         content           Varchar (250) NOT NULL ,
-		    date			        Date NOT NULL ,
+		    date			        Date NOT NULL 
         ,CONSTRAINT user_PK PRIMARY KEY (idnews)
 )ENGINE=InnoDB;
