@@ -330,11 +330,11 @@ INSERT INTO admin(login,password,email) values("admin_03","thomas","t.martin9250
 # Data feedback
 #------------------------------------------------------------------------------------
 
+INSERT INTO feedback(title, content, date, platform, status, idtype, iduser) VALUES("Pas de contenue", "Le contenue n'arrive pas à se charger sur chaque page", "2020-05-23 23:33:12", "ANDROID", "", 1, 3);
 INSERT INTO feedback(title, content, date, platform, status, idtype, iduser) VALUES("Bug Ecran de démarrage", "Ecran noir pendant 5 secondes au démarrage de l'application", "2020-06-11 04:56:33", "ANDROID", "", 1, 1);
 INSERT INTO feedback(title, content, date, platform, status, idtype, iduser) VALUES("Probleme suppresion de compte", "Quand je supprime mon compte, il y a marqué OK mais je peux encore me connecter avec après", "2020-07-01 11:32:56", "FLUTTER", "", 1, 2);
-INSERT INTO feedback(title, content, date, platform, status, idtype, iduser) VALUES("Pas de contenue", "Le contenue n'arrive pas à se charger sur chaque page", "2020-05-23 23:33:12", "ANDROID", "", 1, 3);
-INSERT INTO feedback(title, content, date, platform, status, idtype, idassociation) VALUES("Pas de bouton", "Dans l'onglet amélioration le bouton est a moitié en dehors de l'écran", "2020-07-22 14:55:06", "IOS", "", 1, 6);
 INSERT INTO feedback(title, content, date, platform, status, idtype, iduser) VALUES("Details sur l'association", "L'onglet détails des associations n'affiche pas d'informations", "2020-07-05 11:33:56", "ANDROID", "", 1, 8);
+INSERT INTO feedback(title, content, date, platform, status, idtype, idassociation) VALUES("Pas de bouton", "Dans l'onglet amélioration le bouton est a moitié en dehors de l'écran", "2020-07-22 14:55:06", "IOS", "", 1, 6);
 
 INSERT INTO feedback(content, date, platform, status, note, idtype, iduser) VALUES("La note pourrait être meilleure si le button de login était plus stylisé", "2020-06-11 20:37:59", "ANDROID", "", 4, 2, 8);
 INSERT INTO feedback(content, date, platform, status, note, idtype, iduser) VALUES("Ameliorer le design, les textes sont trop petits pour moi", "2020-05-14 15:21:21", "ANDROID", "", 4, 2, 11);
