@@ -687,7 +687,7 @@ app.patch('/participate/status',function (req, res) {
 app.get('/posts/:iduser', function (req, res) {
     const { iduser } = req.params;
       con.query({
-          sql: 'SELECT post.*, event.name AS eventname, association.acronym AS assoacro, association.logo AS pictureprofilasso FROM user, association, event, follower, post WHERE user.iduser = follower.iduser AND follower.idassociation = association.idassociation AND association.idassociation = event.idassociation AND event.idevent = post.idevent AND user.iduser = ? ORDER BY post.date DESC',
+          sql: 'SELECT post.*, event.name AS eventname, association.acronym AS assoacro, association.logo AS pictureprofilasso, association.name AS assoname FROM user, association, event, follower, post WHERE user.iduser = follower.iduser AND follower.idassociation = association.idassociation AND association.idassociation = event.idassociation AND event.idevent = post.idevent AND user.iduser = ? ORDER BY post.date DESC',
           values: [iduser]
       }, function (err, result, fields) {
           if (err) {
