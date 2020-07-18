@@ -591,6 +591,21 @@ app.get('/participate/:idevent/:iduser',function (req, res) {
     });
 }); // permit to check if an user participe to an event
 
+app.get('/participate/:idevent',function (req, res) {
+    const { idevent } = req.params;
+
+    con.query({
+        sql: 'SELECT COUNT(*) FROM participation WHERE idevent = ? ',
+        values: [idevent, iduser]
+    }, function (err, result, fields) {
+        if (err) {
+            res.status(500).send({error: err});
+        }
+        console.log(result);
+        res.status(200).send(result);
+    });
+}); // permit to check if an user participe to an event
+
 app.post('/participate',function (req, res) {
     const { idevent } = req.body;
     const { iduser } = req.body;
