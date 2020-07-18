@@ -250,7 +250,11 @@ app.post('/category', function (req, res) {
         values: [name]
     }, function (err, result, fields) {
         if (err) {
-            res.status(500).send({error: "Internal Server Error"});
+            if (err.code == "ER_DUP_ENTRY") {
+                res.status(400).send({error: "Category Already Exist"});
+            } else {
+                res.status(500).send({error: "Internal Server Error"});
+            }
         }
         console.log(result);
         res.status(200).send();

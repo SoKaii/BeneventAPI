@@ -25,7 +25,7 @@ CREATE TABLE user(
 
 CREATE TABLE category(
         idcategory Int  Auto_increment  NOT NULL ,
-        name  Varchar (255) NOT NULL
+        name  Varchar (255) NOT NULL UNIQUE
 	,CONSTRAINT category_PK PRIMARY KEY (idcategory)
 )ENGINE=InnoDB;
 
