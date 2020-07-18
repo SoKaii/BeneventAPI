@@ -511,7 +511,7 @@ app.delete('/unfollow',function (req, res) {
 app.get('/news',cors(),function (req, res) {
 
     con.query({
-        sql: 'SELECT * FROM news ORDER BY date DESC LIMIT 3',
+        sql: 'SELECT * FROM news ORDER BY date DESC',
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: err});
@@ -589,7 +589,7 @@ app.post('/participate',function (req, res) {
         res.status(200).send();
     });
 }); // permit an user to signup of an event
- 
+
 app.patch('/participate/refuse',function (req, res) {
     const { status } = req.body;
     const { participate } = req.body;
