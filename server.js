@@ -318,10 +318,11 @@ app.patch('/event/:idevent', function (req, res) {
     const { enddate } = req.body;
     const { location } = req.body;
     const { maxbenevole } = req.body;
+    const { idcategory } = req.body
 
     con.query({
-        sql: 'UPDATE event SET name = ?, description = ?, startdate = ?, enddate = ?, location = ?, maxbenevole = ? WHERE idevent = ?',
-        values: [name, description, startdate, enddate, location, maxbenevole, idevent]
+        sql: 'UPDATE event SET name = ?, description = ?, startdate = ?, enddate = ?, location = ?, maxbenevole = ?, idcategory = ? WHERE idevent = ?',
+        values: [name, description, startdate, enddate, location, maxbenevole, idcategory, idevent]
     }, function (err, result, fields) {
         if (err) {
             res.status(500).send({error: "Internal Server Error"});
