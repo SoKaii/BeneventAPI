@@ -38,7 +38,7 @@ CREATE TABLE association(
         name     Varchar (50) NOT NULL UNIQUE,
         logo     Varchar (255) ,
         acronym  Varchar (50) ,
-        email    Varchar (50) NOT NULL UNIQUE,
+        email    Varchar (75) NOT NULL UNIQUE,
         phone    Varchar (12) ,
         website  Varchar (250) ,
         support  Varchar (250) ,
@@ -56,7 +56,7 @@ CREATE TABLE association(
 
 CREATE TABLE event(
         idevent        Int  Auto_increment  NOT NULL ,
-        name        Varchar (30) NOT NULL ,
+        name        Varchar (40) NOT NULL ,
         description Varchar (255) NOT NULL ,
         startdate        Datetime NOT NULL ,
         enddate        Datetime NOT NULL,
