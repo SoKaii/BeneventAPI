@@ -520,7 +520,7 @@ app.delete('/unfollow',function (req, res) {
             res.status(500).send({error: err});
         }
         console.log(result);
-        res.status(200).send();
+        res.status(204).send();
     });
 }); // permit an user to unfollow an association
 
@@ -580,7 +580,7 @@ app.get('/participate/:idevent/:iduser',function (req, res) {
     const { iduser } = req.params;
 
     con.query({
-        sql: 'SELECT * FROM participation WHERE idevent = ? and iduser = ?',
+        sql: 'SELECT * FROM participation WHERE idevent = ? and iduser = ? and status = 1',
         values: [idevent, iduser]
     }, function (err, result, fields) {
         if (err) {
@@ -595,7 +595,7 @@ app.get('/participate/:idevent',function (req, res) {
     const { idevent } = req.params;
 
     con.query({
-        sql: 'SELECT COUNT(*) FROM participation WHERE idevent = ? ',
+        sql: 'SELECT * FROM participation WHERE idevent = ? ',
         values: [idevent]
     }, function (err, result, fields) {
         if (err) {
@@ -624,26 +624,20 @@ app.post('/participate',function (req, res) {
     });
 }); // permit an user to signup of an event
 
-app.patch('/participate/refuse',function (req, res) {
-    const { status } = req.body;
-    const { participate } = req.body;
-    const { idevent } = req.body;
-    const { iduser } = req.body;
+app.delete('/participate/refuse/:idevent/:iduser',function (req, res) {
+    const { idevent } = req.params;
+    const { iduser } = req.params;
 
-    if (status == 0) {
         con.query({
-            sql: 'UPDATE participation SET status = ?, participate = ? WHERE idevent = ? AND iduser = ?',
-            values: [status, participate, idevent, iduser]
+            sql: 'DELETE FROM participation WHERE idevent = ? AND iduser = ?',
+            values: [idevent, iduser]
         }, function (err, result, fields) {
             if (err) {
                 res.status(500).send({error: "Internal Server Error"});
             }
             console.log(result);
-            res.status(200).send();
-        });
-    } else {
-        res.status(400).send();
-    }
+            res.status(204).send();
+      });
 }); // permit an use to signout of an event
 
 app.patch('/participate/status',function (req, res) {
@@ -1048,6 +1042,6 @@ app.delete('/user/:iduser', function (req, res) {
             res.status(500).send({error: "Internal Server Error"});
         }
         console.log(result);
-        res.status(200).send(result);
+        res.status(204).send(result);
     });
 }); // delete user by iduser
