@@ -803,6 +803,7 @@ app.post('/trello/feedback', async function (req, res) {
     let urlFlutter = 'https://api.trello.com/1/cards?idList=5eb6a36b92d7f26f8f63fdd2&key=' + key + '&token=' + token + '&name=' + name + '&desc=' + desc;
     let urlIos = 'https://api.trello.com/1/cards?idList=5eb6a39114a46d6925a8fee1&key=' + key + '&token=' + token + '&name=' + name + '&desc=' + desc;
 
+    print(urlAndroid);
     if (appli == "ANDROID") {
         fetch(urlAndroid, {
             method: 'POST'
