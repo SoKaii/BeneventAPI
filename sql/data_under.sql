@@ -44,6 +44,6 @@ INSERT INTO type(name) values("note");
 # Data admin
 #------------------------------------------------------------------------------------
 
-INSERT INTO admin(login,password,email) values("admin_01","corentin","cocun91@gmail.com");
-INSERT INTO admin(login,password,email) values("admin_02","matthieu","habib.matthieu1@gmail.com");
-INSERT INTO admin(login,password,email) values("admin_03","thomas","t.martin92500@hotmail.fr");
+INSERT INTO admin(login, password, email) values("admin_01","corentin","cocun91@gmail.com");
+INSERT INTO admin(login, password, email) values("admin_02","matthieu","habib.matthieu1@gmail.com");
+INSERT INTO admin(login, password, email) values("admin_03","thomas","t.martin92500@hotmail.fr");
