@@ -799,11 +799,10 @@ app.post('/trello/feedback', async function (req, res) {
     const { desc } = req.body;
     const { status } = req.body;
 
-    let urlAndroid = 'https://api.trello.com/1/cards?idList=5eb56e17738b8434c33c3e57&key=' + key + '&token=' + token + '&name=' + name.toString("utf8") + '&desc=' + desc.toString("utf8");
-    let urlFlutter = 'https://api.trello.com/1/cards?idList=5eb6a36b92d7f26f8f63fdd2&key=' + key + '&token=' + token + '&name=' + name.toString("utf8") + '&desc=' + desc.toString("utf8");
-    let urlIos = 'https://api.trello.com/1/cards?idList=5eb6a39114a46d6925a8fee1&key=' + key + '&token=' + token + '&name=' + name.toString("utf8") + '&desc=' + desc.toString("utf8");
+    let urlAndroid = 'https://api.trello.com/1/cards?idList=5eb56e17738b8434c33c3e57&key=' + key + '&token=' + token + '&name=' + name + '&desc=' + desc;
+    let urlFlutter = 'https://api.trello.com/1/cards?idList=5eb6a36b92d7f26f8f63fdd2&key=' + key + '&token=' + token + '&name=' + name + '&desc=' + desc;
+    let urlIos = 'https://api.trello.com/1/cards?idList=5eb6a39114a46d6925a8fee1&key=' + key + '&token=' + token + '&name=' + name + '&desc=' + desc;
 
-    console.log(urlAndroid);
     if (appli == "ANDROID") {
         fetch(urlAndroid, {
             method: 'POST'
